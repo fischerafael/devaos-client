@@ -8,6 +8,8 @@ declare module 'styled-components' {
             magenta: string
             cian: string
             white: string
+            lightGrey: string
+            grey: string
         }
     }
 }

@@ -1,28 +1,66 @@
 import Link from 'next/link'
+import { FaGithub, FaGlobe, FaLinkedin } from 'react-icons/fa'
+import styled from 'styled-components'
 
 interface Props {
     link: string
-    image: string
-    title: string
+    type: 'linkedin' | 'github' | 'web'
 }
 
-const SocialIcon: React.FC<Props> = ({ link, image, title }) => {
+const SocialIcon: React.FC<Props> = ({ link, type }) => {
     return (
-        <Link href={link}>
-            <a>
-                <img
-                    style={{
-                        borderRadius: '0',
-                        margin: '1rem 0',
-                        width: '2rem',
-                        height: '2rem'
-                    }}
-                    src={image}
-                    alt={title}
-                />
+        <CustomLink href={link}>
+            <a target="_blank">
+                {' '}
+                {type === 'linkedin' ? (
+                    <CustomLinkedin />
+                ) : type === 'github' ? (
+                    <CustomGithub />
+                ) : (
+                    <CustomGlobe />
+                )}
             </a>
-        </Link>
+        </CustomLink>
     )
 }
 
 export default SocialIcon
+
+export const CustomLink = styled(Link)`
+    a {
+        cursor: pointer;
+    }
+`
+export const CustomGithub = styled(FaGithub)`
+    color: ${({ theme }) => theme.color.dark};
+    width: 20px;
+    height: 20px;
+    margin: 5px 0;
+
+    transition: 0.5s;
+    &:hover {
+        color: ${({ theme }) => theme.color.cian};
+    }
+`
+export const CustomLinkedin = styled(FaLinkedin)`
+    color: ${({ theme }) => theme.color.dark};
+    width: 20px;
+    height: 20px;
+    margin: 5px 0;
+
+    transition: 0.5s;
+    &:hover {
+        color: ${({ theme }) => theme.color.cian};
+    }
+`
+export const CustomGlobe = styled(FaGlobe)`
+    color: ${({ theme }) => theme.color.dark};
+    width: 20px;
+    height: 20px;
+    margin: 5px 0;
+
+    transition: 0.5s;
+    &:hover {
+        color: ${({ theme }) => theme.color.cian};
+    }
+`

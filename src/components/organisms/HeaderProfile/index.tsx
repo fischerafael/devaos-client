@@ -1,60 +1,52 @@
 import styled from 'styled-components'
 import SocialIcon from '../../atoms/SocialIcon'
+import DefaultPageContainer from '../../templates/DefaultPageContainer'
 
-const HeaderProfile = () => {
+interface Props {
+    avatar: string
+    name: string
+    description: string
+    github: string
+    linkedin?: string
+    web?: string
+}
+
+const HeaderProfile: React.FC<Props> = ({
+    avatar,
+    name,
+    description,
+    github,
+    linkedin,
+    web
+}) => {
     return (
-        <ProfileHeaderContainerStyle>
+        <DefaultPageContainer>
             <ProfileHeaderContentStyle>
                 <ContentCotainerStyle>
-                    <img
-                        src="https://avatars.githubusercontent.com/u/47259718?v=4"
-                        alt=""
-                    />
+                    <img src={avatar} alt={name} />
                 </ContentCotainerStyle>
                 <ContentCotainerStyle>
-                    <h1>Rafael Fischer</h1>
-                    <h2>
-                        Desenvolvedor React, NextJS, NodeJS, Typescript &
-                        Javascript, UX & UI Designer, Produtor de Conteúdo
-                    </h2>
+                    <h1>{name}</h1>
+                    <h2>{description}</h2>
                     <div>
-                        <SocialIcon
-                            link="/"
-                            image="/web.svg"
-                            title="Linkedin"
-                        />
-                        <SocialIcon
-                            link="/"
-                            image="/linkedin.svg"
-                            title="Linkedin"
-                        />
-                        <SocialIcon
-                            link="/github"
-                            image="/github.svg"
-                            title="Linkedin"
-                        />
+                        <SocialIcon link={github} type="github" />
+                        {linkedin && (
+                            <SocialIcon link={linkedin} type="linkedin" />
+                        )}
+                        {web && <SocialIcon link={web} type="web" />}
                     </div>
                 </ContentCotainerStyle>
             </ProfileHeaderContentStyle>
-        </ProfileHeaderContainerStyle>
+        </DefaultPageContainer>
     )
 }
 
 export default HeaderProfile
 
-export const ProfileHeaderContainerStyle = styled.main`
-    background: ${({ theme }) => theme.color.white};
-    width: 100%;
-    height: 85vh;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`
 export const ProfileHeaderContentStyle = styled.section`
     max-width: 1024px;
     width: 90%;
-    height: 100%;
+    height: 85vh;
 
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -78,23 +70,29 @@ export const ContentCotainerStyle = styled.div`
     h1 {
         font-weight: 900;
         font-size: 4rem;
+        line-height: 5rem;
         align-self: flex-start;
     }
 
     h2 {
-        font-weight: 400;
-        font-size: 1rem;
         font-family: 'Roboto Slab', serif;
-        width: 50%;
+        font-weight: 400;
+        line-height: 2rem;
+        font-size: 1rem;
+
         min-width: 10rem;
         align-self: flex-start;
+        width: 50%;
     }
 
     div {
         width: 8rem;
         align-self: flex-start;
         height: 2rem;
-        display: flex;
-        justify-content: space-between;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-gap: 1rem;
+        padding: 10px 0;
     }
 `
