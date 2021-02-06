@@ -1,21 +1,42 @@
 import React from 'react'
 import styled from 'styled-components'
+import ProfessionalCard from '../../molecules/ProfessionalCard'
 import DefaultPageContainer from '../../templates/DefaultPageContainer'
 
-const ProfessionalSection = () => {
+interface IJobs {
+    id: string
+    jobTitle: string
+    jobCompany: string
+    jobLocation: string
+    jobStarted: number
+    jobFinished: number
+    jobCurrent: boolean
+    jobDescription?: string
+}
+
+interface Props {
+    jobs: IJobs[]
+}
+
+const ProfessionalSection: React.FC<Props> = ({ jobs }) => {
     return (
         <DefaultPageContainer>
             <ProfessionalSectionHeaderStyle>
                 <h2>Profissional</h2>
                 <TwoColumnCardContainerStyle>
-                    <ProfessionalCardContainerStyle>
-                        <div>
-                            <h3>
-                                Desenvolvedor Web, UX Designer & UI Designer
-                            </h3>
-                        </div>
-                    </ProfessionalCardContainerStyle>
-                    <p>Oisss</p>
+                    {jobs.length &&
+                        jobs.map((job) => (
+                            <ProfessionalCard
+                                key={job.id}
+                                jobTitle={job.jobTitle}
+                                jobStarted={job.jobStarted}
+                                jobFinished={job.jobFinished}
+                                jobCurrent={job.jobCurrent}
+                                jobCompany={job.jobCompany}
+                                jobLocation={job.jobLocation}
+                                jobDescription={job.jobDescription}
+                            />
+                        ))}
                 </TwoColumnCardContainerStyle>
             </ProfessionalSectionHeaderStyle>
         </DefaultPageContainer>
@@ -48,14 +69,9 @@ export const TwoColumnCardContainerStyle = styled.section`
     max-width: 80rem;
     width: 100%;
     padding: 2rem 0;
-    min-height: 50vh;
+    min-height: 30vh;
 
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 2rem;
-`
-export const ProfessionalCardContainerStyle = styled.div`
-    background: ${({ theme }) => theme.color.lightGrey};
-    border-radius: 1rem;
-    padding: 2rem;
 `

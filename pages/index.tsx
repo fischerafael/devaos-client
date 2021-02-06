@@ -2,6 +2,7 @@ import NavBar from '../src/components/organisms/NavBar'
 import HeaderProfile from '../src/components/organisms/HeaderProfile'
 import InfoSection from '../src/components/organisms/InfoSection'
 import ProfessionalSection from '../src/components/organisms/ProfessionalSection'
+import { jobMock } from '../src/services/jobMock'
 
 const Home = () => {
     return (
@@ -26,7 +27,7 @@ const Home = () => {
                             experiência desenvolvendo frontends com React
                             (hooks, context API."
             />
-            <ProfessionalSection />
+            <ProfessionalSection jobs={jobMock} />
         </>
     )
 }
