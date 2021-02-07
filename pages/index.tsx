@@ -1,8 +1,9 @@
 import NavBar from '../src/components/organisms/NavBar'
 import HeaderProfile from '../src/components/organisms/HeaderProfile'
 import InfoSection from '../src/components/organisms/InfoSection'
-import ProfessionalSection from '../src/components/organisms/ProfessionalSection'
+import ExperienceSection from '../src/components/organisms/ExperienceSection'
 import { jobMock } from '../src/services/jobMock'
+import { edMock } from '../src/services/educationMock'
 
 const Home = () => {
     return (
@@ -27,7 +28,8 @@ const Home = () => {
                             experiência desenvolvendo frontends com React
                             (hooks, context API."
             />
-            <ProfessionalSection jobs={jobMock} />
+            <ExperienceSection type={'professional'} experiences={jobMock} />
+            <ExperienceSection type={'education'} experiences={edMock} />
         </>
     )
 }

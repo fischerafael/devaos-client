@@ -2,59 +2,59 @@ import React from 'react'
 import styled from 'styled-components'
 
 interface Props {
-    jobTitle: string
-    jobCompany: string
-    jobLocation: string
-    jobDescription?: string
-    jobStarted: number
-    jobFinished: number
-    jobCurrent: boolean
+    title: string
+    institution: string
+    location: string
+    description?: string
+    startedAt: number
+    finishedAt: number
+    currentStatus: boolean
 }
 
-const ProfessionalCard: React.FC<Props> = ({
-    jobTitle,
-    jobCompany,
-    jobLocation,
-    jobDescription,
-    jobStarted,
-    jobFinished,
-    jobCurrent
+const ExperienceCard: React.FC<Props> = ({
+    title,
+    institution,
+    location,
+    description,
+    startedAt,
+    finishedAt,
+    currentStatus
 }) => {
     return (
-        <ProfessionalCardContainerStyle>
-            <ProfessionalCardHeaderStyle>
-                <h3>{jobTitle}</h3>
-                {jobCurrent ? (
-                    <h4>{jobStarted} - atualmente</h4>
+        <ExperienceCardContainerStyle>
+            <ExperienceCardHeaderStyle>
+                <h3>{title}</h3>
+                {currentStatus ? (
+                    <h4>{startedAt} - atualmente</h4>
                 ) : (
                     <h4>
-                        {jobStarted} - {jobFinished}
+                        {startedAt} - {finishedAt}
                     </h4>
                 )}
 
                 <p>
-                    <span>{jobCompany}</span>
-                    {jobLocation}
+                    <span>{institution}</span>
+                    {location}
                 </p>
-            </ProfessionalCardHeaderStyle>
-            {jobDescription && (
-                <ProfessionalCardContentStyle>
-                    <p>{jobDescription}</p>
-                </ProfessionalCardContentStyle>
+            </ExperienceCardHeaderStyle>
+            {description && (
+                <ExperienceCardContentStyle>
+                    <p>{description}</p>
+                </ExperienceCardContentStyle>
             )}
-        </ProfessionalCardContainerStyle>
+        </ExperienceCardContainerStyle>
     )
 }
 
-export default ProfessionalCard
+export default ExperienceCard
 
-export const ProfessionalCardContainerStyle = styled.div`
+export const ExperienceCardContainerStyle = styled.div`
     background: ${({ theme }) => theme.color.lightGrey};
     border-radius: 1rem;
     border: solid 0.5px ${({ theme }) => theme.color.grey};
     padding: 2rem;
 `
-export const ProfessionalCardHeaderStyle = styled.div`
+export const ExperienceCardHeaderStyle = styled.div`
     h3 {
         font-weight: 900;
         font-size: 2rem;
@@ -86,7 +86,7 @@ export const ProfessionalCardHeaderStyle = styled.div`
         }
     }
 `
-export const ProfessionalCardContentStyle = styled.div`
+export const ExperienceCardContentStyle = styled.div`
     p {
         font-weight: 400;
         font-size: 1rem;

@@ -26,8 +26,8 @@ export const TwoColumnPageContentStyle = styled.section`
     background: ${({ theme }) => theme.color.white};
     max-width: 80rem;
     width: 90%;
-    padding: 2rem 0;
-    min-height: 50vh;
+    padding-top: 2rem;
+    padding-bottom: 4rem;
 
     display: grid;
     grid-template-columns: 1fr 1fr;
