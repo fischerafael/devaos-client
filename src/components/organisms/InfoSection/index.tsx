@@ -33,6 +33,10 @@ export const TwoColumnPageContentStyle = styled.section`
     grid-template-columns: 1fr 1fr;
     grid-gap: 2rem;
 
+    @media (max-width: 800px) {
+        grid-template-columns: 1fr;
+    }
+
     div {
         display: flex;
         flex-direction: column;
@@ -54,6 +58,11 @@ export const TwoColumnPageContentStyle = styled.section`
 
             min-width: 30rem;
             width: 75%;
+
+            @media (max-width: 800px) {
+                min-width: 10rem;
+                width: 90%;
+            }
         }
     }
 `

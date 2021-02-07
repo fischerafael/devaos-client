@@ -23,4 +23,8 @@ export const NavBarButtonStyle = styled.button`
     &:hover {
         background: ${({ theme }) => theme.color.cian};
     }
+
+    @media (max-width: 400px) {
+        min-width: 10rem;
+    }
 `

@@ -46,11 +46,15 @@ export default HeaderProfile
 export const ProfileHeaderContentStyle = styled.section`
     max-width: 1024px;
     width: 90%;
-    height: 85vh;
+    min-height: 85vh;
 
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 2rem;
+
+    @media (max-width: 800px) {
+        grid-template-columns: 1fr;
+    }
 `
 export const ContentCotainerStyle = styled.div`
     width: 100%;
@@ -65,6 +69,12 @@ export const ContentCotainerStyle = styled.div`
         width: 20rem;
         height: 20rem;
         border-radius: 10rem;
+
+        @media (max-width: 800px) {
+            width: 15rem;
+            height: 15rem;
+            border-radius: 7.5rem;
+        }
     }
 
     h1 {
@@ -72,6 +82,15 @@ export const ContentCotainerStyle = styled.div`
         font-size: 4rem;
         line-height: 5rem;
         align-self: flex-start;
+
+        @media (max-width: 800px) {
+            align-self: center;
+            text-align: center;
+        }
+
+        @media (max-width: 400px) {
+            font-size: 3rem;
+        }
     }
 
     h2 {
@@ -83,6 +102,12 @@ export const ContentCotainerStyle = styled.div`
         min-width: 10rem;
         align-self: flex-start;
         width: 50%;
+
+        @media (max-width: 800px) {
+            align-self: center;
+            text-align: center;
+            width: 90%;
+        }
     }
 
     div {
@@ -94,5 +119,9 @@ export const ContentCotainerStyle = styled.div`
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
         grid-gap: 1rem;
         padding: 10px 0;
+
+        @media (max-width: 800px) {
+            align-self: center;
+        }
     }
 `

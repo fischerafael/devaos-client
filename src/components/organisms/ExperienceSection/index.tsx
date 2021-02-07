@@ -76,4 +76,8 @@ export const TwoColumnCardContainerStyle = styled.section`
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 2rem;
+
+    @media (max-width: 800px) {
+        grid-template-columns: 1fr;
+    }
 `

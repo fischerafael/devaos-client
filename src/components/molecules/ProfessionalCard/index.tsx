@@ -64,6 +64,10 @@ export const ExperienceCardHeaderStyle = styled.div`
         min-width: 50%;
 
         padding: 1rem 0;
+
+        @media (max-width: 800px) {
+            width: 90%;
+        }
     }
 
     h4 {
@@ -99,5 +103,9 @@ export const ExperienceCardContentStyle = styled.div`
         margin-bottom: 0;
 
         display: flex;
+
+        @media (max-width: 800px) {
+            width: 90%;
+        }
     }
 `
