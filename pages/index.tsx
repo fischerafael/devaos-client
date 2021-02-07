@@ -6,6 +6,7 @@ import ExperienceSection from '../src/components/organisms/ExperienceSection'
 
 import { jobMock } from '../src/services/jobMock'
 import { edMock } from '../src/services/educationMock'
+import { skillMock } from '../src/services/skillMock'
 
 const Home = () => {
     return (
@@ -23,6 +24,7 @@ const Home = () => {
             <InfoSection bio="Desenvolvedor web com experiência utilizando tecnologias como ReactJS, NextJS, NodeJS, Typescript e Javascript. Originalmente graduado em Arquitetura e Urbanismo, tem mestrado em Engenharia Civil e atualmente está terminando um doutorado onde está desenvolvendo um aplicativo que auxilia arquitetos a compreenderem melhor seus usuários por meio de um algoritmo de inteligência artificial. Tem experiência produzindo conteúdo para a internet (blog, youtube, podcasts), com mais de 20 mil seguidores e 2 milhões de acessos em diversos projetos. É professor substituto no departamento de Expressão Gráfica da Universidade Federal do Paraná." />
             <ExperienceSection type={'professional'} experiences={jobMock} />
             <ExperienceSection type={'education'} experiences={edMock} />
+            <ExperienceSection type={'skill'} skills={skillMock} />
         </>
     )
 }

@@ -1,4 +1,5 @@
-import ExperienceCard from '../../molecules/ProfessionalCard'
+import ExperienceCard from '../../molecules/ExperienceCard'
+import SkillCard from '../../molecules/SkillCard'
 import DefaultPageContainer from '../../templates/DefaultPageContainer'
 
 import styled from 'styled-components'
@@ -14,33 +15,56 @@ interface IExperience {
     description?: string
 }
 
-interface Props {
-    experiences: IExperience[]
-    type: 'professional' | 'education'
+interface ISkill {
+    id: number
+    title: string
+    description?: string
 }
 
-const ExperienceSection: React.FC<Props> = ({ experiences, type }) => {
+interface Props {
+    experiences?: IExperience[]
+    skills?: ISkill[]
+    type: 'professional' | 'education' | 'skill'
+}
+
+const ExperienceSection: React.FC<Props> = ({ experiences, type, skills }) => {
     return (
         <DefaultPageContainer>
             <ExperienceSectionHeaderStyle>
                 {type === 'professional' && <h2>Profissional</h2>}
                 {type === 'education' && <h2>Educação</h2>}
+                {type === 'skill' && <h2>Habilidades</h2>}
             </ExperienceSectionHeaderStyle>
-            <TwoColumnCardContainerStyle>
-                {experiences.length &&
-                    experiences.map((exp) => (
-                        <ExperienceCard
-                            key={exp.id}
-                            title={exp.title}
-                            startedAt={exp.startedAt}
-                            finishedAt={exp.finishedAt}
-                            currentStatus={exp.currentStatus}
-                            institution={exp.institution}
-                            location={exp.location}
-                            description={exp.description}
-                        />
-                    ))}
-            </TwoColumnCardContainerStyle>
+
+            {experiences && (
+                <TwoColumnCardContainerStyle>
+                    {experiences.length !== 0 &&
+                        experiences.map((exp) => (
+                            <ExperienceCard
+                                key={exp.id}
+                                title={exp.title}
+                                startedAt={exp.startedAt}
+                                finishedAt={exp.finishedAt}
+                                currentStatus={exp.currentStatus}
+                                institution={exp.institution}
+                                location={exp.location}
+                                description={exp.description}
+                            />
+                        ))}
+                </TwoColumnCardContainerStyle>
+            )}
+
+            {skills && (
+                <FourColumnCardContainerStyle>
+                    {skills.length !== 0 &&
+                        skills.map((skill) => (
+                            <SkillCard
+                                title={skill.title}
+                                description={skill.description}
+                            />
+                        ))}
+                </FourColumnCardContainerStyle>
+            )}
         </DefaultPageContainer>
     )
 }
@@ -78,6 +102,30 @@ export const TwoColumnCardContainerStyle = styled.section`
     grid-gap: 2rem;
 
     @media (max-width: 800px) {
+        grid-template-columns: 1fr;
+    }
+`
+
+export const FourColumnCardContainerStyle = styled.section`
+    background: ${({ theme }) => theme.color.white};
+    max-width: 80rem;
+    width: 90%;
+    padding: 2rem 0;
+    min-height: 30vh;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 2rem;
+
+    @media (max-width: 800px) {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    @media (max-width: 600px) {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    @media (max-width: 360px) {
         grid-template-columns: 1fr;
     }
 `
