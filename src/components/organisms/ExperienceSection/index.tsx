@@ -9,7 +9,7 @@ interface IExperience {
     institution: string
     location: string
     startedAt: number
-    finishedAt: number
+    finishedAt?: number
     currentStatus: boolean
     description?: string
 }

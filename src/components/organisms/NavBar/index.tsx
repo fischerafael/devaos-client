@@ -22,7 +22,7 @@ const NavBar = () => {
                     ) : (
                         <FaSun onClick={handleChangeTheme} />
                     )}
-                    <Button>SAIR</Button>
+                    <Button>ENTRAR</Button>
                 </NavBarActionsStyle>
             </NavBarContentStyle>
         </NavBarContainerStyle>

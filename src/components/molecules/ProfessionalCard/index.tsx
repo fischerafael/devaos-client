@@ -24,7 +24,7 @@ const ExperienceCard: React.FC<Props> = ({
         <ExperienceCardContainerStyle>
             <ExperienceCardHeaderStyle>
                 <h3>{title}</h3>
-                {currentStatus ? (
+                {currentStatus || !finishedAt ? (
                     <h4>{startedAt} - atualmente</h4>
                 ) : (
                     <h4>
@@ -60,7 +60,7 @@ export const ExperienceCardHeaderStyle = styled.div`
         font-size: 2rem;
         line-height: 2.5rem;
 
-        width: 70%;
+        width: 80%;
         min-width: 50%;
 
         padding: 1rem 0;
@@ -98,14 +98,14 @@ export const ExperienceCardContentStyle = styled.div`
         margin: 1rem 0;
 
         min-width: 50%;
-        width: 75%;
+        width: 90%;
 
         margin-bottom: 0;
 
         display: flex;
 
         @media (max-width: 800px) {
-            width: 90%;
+            width: 100%;
         }
     }
 `
