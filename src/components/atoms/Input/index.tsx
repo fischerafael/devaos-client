@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Input = ({ type, id, title }) => {
+const Input = ({ type, title }) => {
     return (
         <InputContainerStyle>
             <input type={type || 'text'} required />
@@ -15,13 +15,18 @@ export default Input
 export const InputContainerStyle = styled.div`
     position: relative;
     width: 100%;
-    height: 4rem;
+    height: 3rem;
+
+    margin-top: 1rem;
 
     input {
         outline: none;
 
         transition: 0.5s;
+
         padding: 0 2rem;
+        padding-top: 0.75rem;
+        font-size: 1rem;
 
         border: 1px solid ${({ theme }) => theme.color.grey};
         width: 100%;
@@ -37,7 +42,7 @@ export const InputContainerStyle = styled.div`
 
         &:focus + label,
         &:valid + label {
-            top: 0.5rem;
+            top: 0.25rem;
             font-size: 0.5rem;
         }
     }
@@ -45,7 +50,7 @@ export const InputContainerStyle = styled.div`
     label {
         z-index: 10;
         position: absolute;
-        top: 1.25rem;
+        top: 0.85rem;
         left: 1rem;
 
         padding: 0 1rem;
