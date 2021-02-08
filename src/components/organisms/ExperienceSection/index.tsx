@@ -59,6 +59,7 @@ const ExperienceSection: React.FC<Props> = ({ experiences, type, skills }) => {
                     {skills.length !== 0 &&
                         skills.map((skill) => (
                             <SkillCard
+                                key={skill.id}
                                 title={skill.title}
                                 description={skill.description}
                             />
