@@ -48,6 +48,11 @@ export const SkillHeaderCardStyle = styled.div`
 
         padding-right: 1rem;
         text-align: center;
+
+        @media (max-width: 800px) {         
+            font-size: 1.5rem;
+            line-height:1.25rem;
+        }
     }
 `
 export const ExperienceBodyCardStyle = styled.div`

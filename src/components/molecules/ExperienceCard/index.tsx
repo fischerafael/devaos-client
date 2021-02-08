@@ -53,6 +53,7 @@ export const ExperienceCardContainerStyle = styled.div`
     border-radius: 1rem;
     border: solid 0.5px ${({ theme }) => theme.color.grey};
     padding: 2rem;
+    padding-bottom: 2.5rem;
 `
 export const ExperienceCardHeaderStyle = styled.div`
     h3 {
@@ -67,6 +68,9 @@ export const ExperienceCardHeaderStyle = styled.div`
 
         @media (max-width: 800px) {
             width: 90%;
+
+            font-size: 1.5rem;
+            line-height: 2rem;
         }
     }
 
@@ -74,6 +78,11 @@ export const ExperienceCardHeaderStyle = styled.div`
         font-weight: 400;
         font-size: 1rem;
         line-height: 1.5rem;
+
+        @media (max-width: 800px) {         
+            font-size: 0.75rem;
+            line-height:1.25rem;
+        }
     }
 
     p {
@@ -82,11 +91,21 @@ export const ExperienceCardHeaderStyle = styled.div`
         line-height: 1.5rem;
         margin-bottom: 1rem;
 
+        @media (max-width: 800px) {         
+            font-size: 1rem;
+            line-height:1.25rem;
+        }
+
         span {
             font-weight: 900;
             font-size: 1.2rem;
             line-height: 1.5rem;
             margin-right: 0.5rem;
+
+            @media (max-width: 800px) {         
+                font-size: 1rem;
+                line-height:1.25rem;
+            }
         }
     }
 `
@@ -94,7 +113,7 @@ export const ExperienceCardContentStyle = styled.div`
     p {
         font-weight: 400;
         font-size: 1rem;
-        line-height: 1.5rem;
+        line-height: 1.75rem;
         margin: 1rem 0;
 
         min-width: 50%;
@@ -106,6 +125,8 @@ export const ExperienceCardContentStyle = styled.div`
 
         @media (max-width: 800px) {
             width: 100%;
+            font-size: 1rem;
+            line-height: 1.75rem;
         }
     }
 `
