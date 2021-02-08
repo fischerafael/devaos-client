@@ -7,7 +7,7 @@ import DefaultPageContainer from '../src/components/templates/DefaultPageContain
 const home = () => {
     return (
         <>
-            <CustomHead title="Rafael Fischer" />
+            <CustomHead title="Dev Aos" />
             <NavBar />
             <DefaultPageContainer>
                 <HeroContainerStyle>
