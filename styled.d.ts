@@ -6,7 +6,11 @@ declare module 'styled-components' {
             ultraDark: string
             dark: string
             magenta: string
+            cianBtn: string
+            greyBtn: string
             cian: string
+            head: string
+            blur: string
             white: string
             lightGrey: string
             grey: string

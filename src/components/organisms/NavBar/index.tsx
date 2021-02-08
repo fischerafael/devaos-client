@@ -1,4 +1,4 @@
-import Button from '../../atoms/NavButton'
+import NavButton from '../../atoms/NavButton'
 
 import styled from 'styled-components'
 
@@ -22,7 +22,7 @@ const NavBar = () => {
                     ) : (
                         <FaSun onClick={handleChangeTheme} />
                     )}
-                    <Button>ENTRAR</Button>
+                    <NavButton>ENTRAR</NavButton>
                 </NavBarActionsStyle>
             </NavBarContentStyle>
         </NavBarContainerStyle>
