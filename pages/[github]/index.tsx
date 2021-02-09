@@ -4,20 +4,25 @@ import HeaderProfile from '../../src/components/organisms/HeaderProfile'
 import InfoSection from '../../src/components/organisms/InfoSection'
 import ExperienceSection from '../../src/components/organisms/ExperienceSection'
 
-import { jobMock } from '../../src/services/jobMock'
-import { edMock } from '../../src/services/educationMock'
-import { skillMock } from '../../src/services/skillMock'
+import {
+    getStaticPathsGithub,
+    getStaticPathsGithubFormat,
+    getStaticPropsGithub
+} from '../../src/services/devaos-api'
+
 import { GetStaticPaths, GetStaticProps } from 'next'
-import devaosApi from '../../src/services/devaos-api'
 
 const Home = ({ data }) => {
     const userData = data as NextProps
 
-    const proExp = userData.experiences.filter(
-        (exp) => exp.type === 'professional'
-    )
-    const edExp = userData.experiences.filter((exp) => exp.type === 'education')
-    const skills = userData.skills
+    const proExp = userData?.experiences
+        ? userData.experiences.filter((exp) => exp.type === 'professional')
+        : []
+    const edExp = userData?.experiences
+        ? userData.experiences.filter((exp) => exp.type === 'education')
+        : []
+    const skills = userData?.skills ? userData.skills : []
+    const bio = userData?.bio ? userData.bio : ''
 
     return (
         <>
@@ -31,7 +36,7 @@ const Home = ({ data }) => {
                 linkedin="https://www.linkedin.com/in"
                 web={`/${userData.github}`}
             />
-            {userData.bio.bio && <InfoSection bio={userData.bio.bio} />}
+            {bio !== '' && <InfoSection bio={userData.bio.bio} />}
             {proExp.length > 0 && (
                 <ExperienceSection type={'professional'} experiences={proExp} />
             )}
@@ -48,27 +53,20 @@ const Home = ({ data }) => {
 export default Home
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    const { data } = await devaosApi.get('/users')
+    const { data } = await getStaticPathsGithub()
 
-    const githubs = data.map((item) => item.github)
-    const paths = githubs.map((github: string) => {
-        return {
-            params: { github }
-        }
-    })
+    const paths = getStaticPathsGithubFormat(data)
 
     return {
         paths: paths,
-        fallback: 'blocking'
+        fallback: false
     }
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
     const github = context.params.github as string
 
-    const { data } = await devaosApi.get(
-        `https://devaos.herokuapp.com/profiles/${github}`
-    )
+    const { data } = await getStaticPropsGithub(github)
 
     return {
         props: {
