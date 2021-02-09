@@ -48,8 +48,17 @@ const Home = ({ data }) => {
 export default Home
 
 export const getStaticPaths: GetStaticPaths = async () => {
+    const { data } = await devaosApi.get('/users')
+
+    const githubs = data.map((item) => item.github)
+    const paths = githubs.map((github: string) => {
+        return {
+            params: { github }
+        }
+    })
+
     return {
-        paths: [{ params: { github: 'fischerafael' } }],
+        paths: paths,
         fallback: 'blocking'
     }
 }
