@@ -76,9 +76,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
     const { data, status } = await getStaticPropsGithub(github)
 
-    console.log(data)
-
-    if (!data.personal) {
+    if (status !== 200) {
         return {
             notFound: true
         }
