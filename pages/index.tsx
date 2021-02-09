@@ -1,32 +1,84 @@
+import Link from 'next/link'
+import styled from 'styled-components'
+
 import CustomHead from '../src/components/atoms/CustomHead'
+import MainButton from '../src/components/atoms/MainButton'
+
 import NavBar from '../src/components/organisms/NavBar'
-import HeaderProfile from '../src/components/organisms/HeaderProfile'
-import InfoSection from '../src/components/organisms/InfoSection'
-import ExperienceSection from '../src/components/organisms/ExperienceSection'
+import DefaultPageContainer from '../src/components/templates/DefaultPageContainer'
 
-import { jobMock } from '../src/services/jobMock'
-import { edMock } from '../src/services/educationMock'
-import { skillMock } from '../src/services/skillMock'
-
-const Home = () => {
+const home = () => {
     return (
         <>
-            <CustomHead title="Rafael Fischer" />
+            <CustomHead title="Dev Aos" />
             <NavBar />
-            <HeaderProfile
-                avatar={'https://avatars.githubusercontent.com/u/47259718?v=4'}
-                name="Rafael Fischer"
-                description="Desenvolvedor ReactJS, NextJS, NodeJS, Javascript & Typescript. UI & UX Designer. Produtor de conteúdo para internet."
-                github="https://github.com/fischerafael"
-                linkedin="https://www.linkedin.com/in"
-                web="https://fischerafael.com"
-            />
-            <InfoSection bio="Desenvolvedor web com experiência utilizando tecnologias como ReactJS, NextJS, NodeJS, Typescript e Javascript. Originalmente graduado em Arquitetura e Urbanismo, tem mestrado em Engenharia Civil e atualmente está terminando um doutorado onde está desenvolvendo um aplicativo que auxilia arquitetos a compreenderem melhor seus usuários por meio de um algoritmo de inteligência artificial. Tem experiência produzindo conteúdo para a internet (blog, youtube, podcasts), com mais de 20 mil seguidores e 2 milhões de acessos em diversos projetos. É professor substituto no departamento de Expressão Gráfica da Universidade Federal do Paraná." />
-            <ExperienceSection type={'professional'} experiences={jobMock} />
-            <ExperienceSection type={'education'} experiences={edMock} />
-            <ExperienceSection type={'skill'} skills={skillMock} />
+            <DefaultPageContainer>
+                <HeroContainerStyle>
+                    <h1>DEV AOS</h1>
+                    <h2>
+                        O ponto de encontro de pessoas que resolveram entrar
+                        mais tarde na carreira de tecnologia.
+                    </h2>
+                    <Link href="/register">
+                        <a>
+                            <MainButton>CRIAR PERFIL</MainButton>
+                        </a>
+                    </Link>
+                </HeroContainerStyle>
+            </DefaultPageContainer>
         </>
     )
 }
 
-export default Home
+export default home
+
+export const HeroContainerStyle = styled.main`
+    max-width: 1024px;
+    width: 90%;
+    min-height: 85vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h1 {
+        font-family: sans-serif;
+        font-size: 12rem;
+        color: transparent;
+        -webkit-text-stroke-width: 4px;
+        -webkit-text-stroke-color: ${({ theme }) => theme.color.head};
+
+        text-shadow: 0px 0px 30px ${({ theme }) => theme.color.blur};
+        text-align: center;
+
+        @media (max-width: 800px) {
+            font-size: 8rem;
+            -webkit-text-stroke-width: 3px;
+        }
+
+        @media (max-width: 480px) {
+            font-size: 5rem;
+            -webkit-text-stroke-width: 2px;
+        }
+    }
+
+    h2 {
+        font-family: 'Roboto Slab', sans-serif;
+        font-weight: 400;
+        font-size: 1.5rem;
+
+        text-align: center;
+
+        min-width: 10rem;
+        width: 70%;
+
+        @media (max-width: 800px) {
+            font-size: 1rem;
+        }
+
+        @media (max-width: 480px) {
+            font-size: 0.75rem;
+        }
+    }
+`

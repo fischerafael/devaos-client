@@ -1,6 +1,7 @@
 import NavButton from '../../atoms/NavButton'
 
 import styled from 'styled-components'
+import Link from 'next/link'
 
 import { useContext } from 'react'
 import ThemeContext from '../../../contexts/theme'
@@ -13,16 +14,21 @@ const NavBar = () => {
     return (
         <NavBarContainerStyle>
             <NavBarContentStyle>
-                <NavBarLogoStyle
-                    src={dark ? '/devaos-darktheme.svg' : '/devaos.svg'}
-                />
+                <Link href="/">
+                    <a>
+                        <NavBarLogoStyle
+                            src={dark ? '/devaos-darktheme.svg' : '/devaos.svg'}
+                        />
+                    </a>
+                </Link>
+
                 <NavBarActionsStyle>
                     {dark ? (
                         <FaMoon onClick={handleChangeTheme} />
                     ) : (
                         <FaSun onClick={handleChangeTheme} />
                     )}
-                    <NavButton>ENTRAR</NavButton>
+                    <NavButton url="/login">ENTRAR</NavButton>
                 </NavBarActionsStyle>
             </NavBarContentStyle>
         </NavBarContainerStyle>
@@ -49,7 +55,9 @@ export const NavBarContentStyle = styled.nav`
     align-items: center;
     justify-content: space-between;
 `
-export const NavBarLogoStyle = styled.img``
+export const NavBarLogoStyle = styled.img`
+    cursor: pointer;
+`
 export const NavBarActionsStyle = styled.div`
     display: flex;
     align-items: center;

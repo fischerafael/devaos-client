@@ -7,7 +7,11 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0;
         font-family: 'Roboto Slab', serif;
         font-size: 12px;
-    }    
+    }  
+    a {
+        text-decoration: none;
+        font: inherit;
+    }  
     h1, h2, h3, h4, h5, h6 {
         font-family: 'Roboto', sans-serif;
         color: ${({ theme }) => theme.color.dark}

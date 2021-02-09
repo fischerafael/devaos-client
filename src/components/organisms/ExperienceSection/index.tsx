@@ -5,18 +5,17 @@ import DefaultPageContainer from '../../templates/DefaultPageContainer'
 import styled from 'styled-components'
 
 interface IExperience {
-    id: string
+    _id: string
     title: string
     institution: string
     location: string
-    startedAt: number
+    startedAt?: number
     finishedAt?: number
-    currentStatus: boolean
     description?: string
 }
 
 interface ISkill {
-    id: number
+    _id: string
     title: string
     description?: string
 }
@@ -41,11 +40,10 @@ const ExperienceSection: React.FC<Props> = ({ experiences, type, skills }) => {
                     {experiences.length !== 0 &&
                         experiences.map((exp) => (
                             <ExperienceCard
-                                key={exp.id}
+                                key={exp._id}
                                 title={exp.title}
                                 startedAt={exp.startedAt}
                                 finishedAt={exp.finishedAt}
-                                currentStatus={exp.currentStatus}
                                 institution={exp.institution}
                                 location={exp.location}
                                 description={exp.description}
@@ -59,7 +57,7 @@ const ExperienceSection: React.FC<Props> = ({ experiences, type, skills }) => {
                     {skills.length !== 0 &&
                         skills.map((skill) => (
                             <SkillCard
-                                key={skill.id}
+                                key={skill._id}
                                 title={skill.title}
                                 description={skill.description}
                             />

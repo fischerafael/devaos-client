@@ -1,7 +1,18 @@
 import styled from 'styled-components'
+import Link from 'next/link'
 
-const NavButton = ({ children }) => {
-    return <NavBarButtonStyle>{children}</NavBarButtonStyle>
+interface Props {
+    url?: string
+}
+
+const NavButton: React.FC<Props> = ({ children, url }) => {
+    return (
+        <Link href={url ? url : ''}>
+            <a style={{ textDecoration: 'none' }}>
+                <NavBarButtonStyle>{children}</NavBarButtonStyle>
+            </a>
+        </Link>
+    )
 }
 
 export default NavButton

@@ -8,7 +8,6 @@ interface Props {
     description?: string
     startedAt: number
     finishedAt: number
-    currentStatus: boolean
 }
 
 const ExperienceCard: React.FC<Props> = ({
@@ -17,14 +16,13 @@ const ExperienceCard: React.FC<Props> = ({
     location,
     description,
     startedAt,
-    finishedAt,
-    currentStatus
+    finishedAt
 }) => {
     return (
         <ExperienceCardContainerStyle>
             <ExperienceCardHeaderStyle>
                 <h3>{title}</h3>
-                {currentStatus || !finishedAt ? (
+                {!finishedAt ? (
                     <h4>{startedAt} - atualmente</h4>
                 ) : (
                     <h4>
@@ -79,9 +77,9 @@ export const ExperienceCardHeaderStyle = styled.div`
         font-size: 1rem;
         line-height: 1.5rem;
 
-        @media (max-width: 800px) {         
+        @media (max-width: 800px) {
             font-size: 0.75rem;
-            line-height:1.25rem;
+            line-height: 1.25rem;
         }
     }
 
@@ -91,9 +89,9 @@ export const ExperienceCardHeaderStyle = styled.div`
         line-height: 1.5rem;
         margin-bottom: 1rem;
 
-        @media (max-width: 800px) {         
+        @media (max-width: 800px) {
             font-size: 1rem;
-            line-height:1.25rem;
+            line-height: 1.25rem;
         }
 
         span {
@@ -102,9 +100,9 @@ export const ExperienceCardHeaderStyle = styled.div`
             line-height: 1.5rem;
             margin-right: 0.5rem;
 
-            @media (max-width: 800px) {         
+            @media (max-width: 800px) {
                 font-size: 1rem;
-                line-height:1.25rem;
+                line-height: 1.25rem;
             }
         }
     }
