@@ -11,8 +11,16 @@ import {
 } from '../../src/services/devaos-api'
 
 import { GetStaticPaths, GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
+import LoadingPage from '../../src/components/templates/LoadingPage'
 
 const Home = ({ data }) => {
+    const router = useRouter()
+
+    if (router.isFallback) {
+        return <LoadingPage />
+    }
+
     const userData = data as NextProps
 
     const proExp = userData?.experiences
@@ -59,14 +67,22 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
     return {
         paths: paths,
-        fallback: false
+        fallback: true
     }
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
     const github = context.params.github as string
 
-    const { data } = await getStaticPropsGithub(github)
+    const { data, status } = await getStaticPropsGithub(github)
+
+    console.log(data)
+
+    if (!data.personal) {
+        return {
+            notFound: true
+        }
+    }
 
     return {
         props: {
