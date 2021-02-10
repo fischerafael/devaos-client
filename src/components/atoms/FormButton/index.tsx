@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
-const FormButton = ({ children }) => {
-    return <FormButtonStyle>{children}</FormButtonStyle>
+const FormButton = ({ children, onClick }) => {
+    return <FormButtonStyle onClick={onClick}>{children}</FormButtonStyle>
 }
 
 export default FormButton

@@ -3,12 +3,12 @@ import FormButton from '../../src/components/atoms/FormButton'
 import Input from '../../src/components/atoms/Input'
 import SessionFormPage from '../../src/components/organisms/SessionFormPage'
 import DefaultPageContainer from '../../src/components/templates/DefaultPageContainer'
+import FormPagination from '../../src/components/molecules/FormPagination'
 
 import { useEffect, useState } from 'react'
-import FormPagination from '../../src/components/molecules/FormPagination'
-import TextArea from '../../src/components/atoms/TextArea'
 
 import githubApi from '../../src/services/github-api'
+import devaosApi from '../../src/services/devaos-api'
 
 const Register = () => {
     const [currentPage, setCurrentPage] = useState(0)
@@ -55,6 +55,25 @@ const Register = () => {
         setCurrentPage((prevState) =>
             prevState === totalPages - totalPages ? prevState : prevState - 1
         )
+    }
+
+    async function handleUserRegistration() {
+        try {
+            const response = await devaosApi.post('/users', {
+                github,
+                email,
+                password,
+                name,
+                avatar,
+                location,
+                title
+            })
+            console.log(response)
+            alert('Usuário cadastrado com sucesso')
+        } catch (err) {
+            console.log(err)
+            alert('erro')
+        }
     }
 
     return (
@@ -137,7 +156,27 @@ const Register = () => {
                                 next={handleNextPage}
                                 currentPage={currentPage}
                             />
-                            <FormButton>FINALIZAR</FormButton>
+                            {github &&
+                            email &&
+                            password &&
+                            name &&
+                            avatar &&
+                            location &&
+                            title ? (
+                                <FormButton onClick={handleUserRegistration}>
+                                    FINALIZAR
+                                </FormButton>
+                            ) : (
+                                <p
+                                    style={{
+                                        textAlign: 'center',
+                                        marginBottom: '2rem',
+                                        fontWeight: 'bold'
+                                    }}
+                                >
+                                    Preencha todos os campos
+                                </p>
+                            )}
                         </>
                     )}
                 </SessionFormPage>
