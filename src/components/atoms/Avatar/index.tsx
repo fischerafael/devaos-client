@@ -7,7 +7,16 @@ interface Props {
 }
 
 const Avatar: React.FC<Props> = ({ avatar, alt }) => {
-    return <AvatarStyle src={avatar} alt={alt} />
+    return (
+        <AvatarStyle
+            src={
+                avatar
+                    ? avatar
+                    : 'https://www.thermaxglobal.com/wp-content/uploads/2020/05/image-not-found.jpg'
+            }
+            alt={alt}
+        />
+    )
 }
 
 export default Avatar

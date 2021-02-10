@@ -133,11 +133,7 @@ const Register = () => {
                     )}
                     {currentPage === 2 && (
                         <>
-                            <Avatar
-                                avatar={avatar}
-                                alt={github}
-                                position="absolute"
-                            />
+                            <Avatar avatar={avatar} alt={github} />
                             <Input
                                 type="text"
                                 title="Perfil"
