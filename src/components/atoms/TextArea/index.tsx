@@ -8,41 +8,41 @@ interface Props {
     onChange(e: any): void
 }
 
-const Input: React.FC<Props> = ({ type, title, value, onChange }) => {
+const TextArea: React.FC<Props> = ({ type, title, value, onChange }) => {
     return (
-        <InputContainerStyle>
-            <input
-                type={type || 'text'}
-                required
-                value={value}
-                onChange={onChange}
-            />
+        <TextAreaContainerStyle>
+            <textarea rows={5} required value={value} onChange={onChange} />
             <label>{title}</label>
-        </InputContainerStyle>
+        </TextAreaContainerStyle>
     )
 }
 
-export default Input
+export default TextArea
 
-export const InputContainerStyle = styled.div`
+export const TextAreaContainerStyle = styled.div`
     position: relative;
     width: 100%;
 
     margin-top: 1rem;
 
-    input {
+    textarea {
         outline: none;
+
+        resize: vertical;
 
         transition: 0.5s;
 
         padding: 0 2rem;
-        padding-top: 0rem;
+        padding-top: 1.5rem;
         font-size: 1rem;
 
         border: 1px solid ${({ theme }) => theme.color.grey};
         width: 100%;
-        height: 4rem;
-        border-radius: 10rem;
+
+        min-height: 4rem;
+        max-height: 10rem;
+
+        border-radius: 2rem;
 
         background: ${({ theme }) => theme.color.white};
         color: ${({ theme }) => theme.color.ultraDark};
