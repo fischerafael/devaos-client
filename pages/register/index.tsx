@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react'
 
 import githubApi from '../../src/services/github-api'
 import devaosApi from '../../src/services/devaos-api'
+import Avatar from '../../src/components/atoms/Avatar'
 
 const Register = () => {
     const [currentPage, setCurrentPage] = useState(0)
@@ -132,6 +133,11 @@ const Register = () => {
                     )}
                     {currentPage === 2 && (
                         <>
+                            <Avatar
+                                avatar={avatar}
+                                alt={github}
+                                position="absolute"
+                            />
                             <Input
                                 type="text"
                                 title="Perfil"

@@ -7,18 +7,29 @@ interface Props {
 }
 
 const Avatar: React.FC<Props> = ({ avatar, alt }) => {
-    return <AvatarStyle src={avatar} alt={alt} />
+    return (
+        <div>
+            <AvatarStyle src={avatar} alt={alt} />
+        </div>
+    )
 }
 
 export default Avatar
 
 export const AvatarStyle = styled.img`
-    border-radius: 50%;
-    max-width: 30rem;
+    display: flex;
+    width: 100%;
 
-    @media (max-width: 800px) {
-        width: 15rem;
-        height: 15rem;
+    img {
         border-radius: 50%;
+        width: 50%;
+
+        z-index: 10;
+
+        @media (max-width: 800px) {
+            width: 15rem;
+            height: 15rem;
+            border-radius: 50%;
+        }
     }
 `
