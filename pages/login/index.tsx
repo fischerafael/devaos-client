@@ -5,8 +5,12 @@ import DefaultPageContainer from '../../src/components/templates/DefaultPageCont
 import SessionFormPage from '../../src/components/organisms/SessionFormPage'
 import Input from '../../src/components/atoms/Input'
 import FormButton from '../../src/components/atoms/FormButton'
+import { useState } from 'react'
 
 const index = () => {
+    const [github, setGithub] = useState('')
+    const [password, setPassword] = useState('')
+
     return (
         <>
             <DefaultPageContainer>
@@ -17,9 +21,19 @@ const index = () => {
                     alternativeTitle="Ainda não sou cadastrado"
                     alternativeLink="/register"
                 >
-                    <Input type="text" title="Usuário GitHub" />
-                    <Input type="text" title="Senha" />
-                    <FormButton>ENTRAR</FormButton>
+                    <Input
+                        type="text"
+                        title="Usuário GitHub"
+                        value={github}
+                        onChange={(e) => setGithub(e.target.value)}
+                    />
+                    <Input
+                        type="text"
+                        title="Senha"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <FormButton onClick={() => {}}>ENTRAR</FormButton>
                 </SessionFormPage>
             </DefaultPageContainer>
         </>
