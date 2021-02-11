@@ -26,9 +26,9 @@ const Home: React.FC<Props> = ({ data }) => {
     const { isFallback } = useRouter()
     if (isFallback) return <LoadingPage />
 
-    const { logged, user } = useAuth()
+    const { logged, user, isOwner } = useAuth()
 
-    console.log(logged, user)
+    console.log(logged, user, isOwner)
 
     const {
         avatar,

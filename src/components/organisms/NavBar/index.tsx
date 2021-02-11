@@ -11,9 +11,7 @@ import { FaSun, FaMoon } from 'react-icons/fa'
 
 const NavBar = () => {
     const { handleChangeTheme, dark } = useContext(ThemeContext)
-    const { logged, user, isOwner } = useAuth()
-
-    console.log('is owner', isOwner)
+    const { logged, user, isOwner, handleLogout } = useAuth()
 
     return (
         <NavBarContainerStyle>
@@ -32,7 +30,11 @@ const NavBar = () => {
                     ) : (
                         <FaSun onClick={handleChangeTheme} />
                     )}
-                    {logged ? null : <NavButton url="/login">ENTRAR</NavButton>}
+                    {logged ? (
+                        <NavButton action={handleLogout}>SAIR</NavButton>
+                    ) : (
+                        <NavButton url="/login">ENTRAR</NavButton>
+                    )}
                 </NavBarActionsStyle>
             </NavBarContentStyle>
         </NavBarContainerStyle>

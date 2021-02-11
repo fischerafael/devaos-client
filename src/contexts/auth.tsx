@@ -7,6 +7,7 @@ interface Props {
         github: string
     }
     handleAuth(data: { id: string; github: string; login?: boolean }): void
+    handleLogout(): void
 }
 
 const AuthContext = createContext({} as Props)
@@ -34,9 +35,21 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    function handleLogout() {
+        setLogged(false)
+        setId('')
+        setGithub('')
+        localStorage.removeItem('devaos')
+    }
+
     return (
         <AuthContext.Provider
-            value={{ logged, user: { _id: id, github }, handleAuth }}
+            value={{
+                logged,
+                user: { _id: id, github },
+                handleAuth,
+                handleLogout
+            }}
         >
             {children}
         </AuthContext.Provider>

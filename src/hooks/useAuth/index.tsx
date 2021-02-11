@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from 'react'
 import AuthContext from '../../contexts/auth'
 
 const useAuth = () => {
-    const { logged, user, handleAuth } = useContext(AuthContext)
+    const { logged, user, handleAuth, handleLogout } = useContext(AuthContext)
 
     useEffect(() => {
         const authData = localStorage.getItem('devaos')
@@ -24,7 +24,7 @@ const useAuth = () => {
         if (user.github === github) setIsOwner(true)
     }, [user.github, github])
 
-    return { logged, user, isOwner }
+    return { logged, user, isOwner, handleLogout }
 }
 
 export default useAuth

@@ -1,15 +1,22 @@
 import styled from 'styled-components'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 interface Props {
     url?: string
+    action?(e: any): void
 }
 
-const NavButton: React.FC<Props> = ({ children, url }) => {
+const NavButton: React.FC<Props> = ({ children, url, action }) => {
+    const { query } = useRouter()
+    const { github } = query
+
     return (
-        <Link href={url ? url : ''}>
+        <Link href={url ? url : `/${github}`}>
             <a style={{ textDecoration: 'none' }}>
-                <NavBarButtonStyle>{children}</NavBarButtonStyle>
+                <NavBarButtonStyle onClick={action}>
+                    {children}
+                </NavBarButtonStyle>
             </a>
         </Link>
     )
