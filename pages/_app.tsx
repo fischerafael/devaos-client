@@ -5,6 +5,7 @@ import { ThemeProvider } from 'styled-components'
 import ThemeContext from '../src/contexts/theme'
 
 import { useState } from 'react'
+import { AuthProvider } from '../src/contexts/auth'
 
 export default function App({ Component, pageProps }) {
     const [dark, setDarkTheme] = useState<boolean>(false)
@@ -17,8 +18,10 @@ export default function App({ Component, pageProps }) {
         <>
             <ThemeContext.Provider value={{ dark, handleChangeTheme }}>
                 <ThemeProvider theme={dark === true ? darkTheme : defaultTheme}>
-                    <GlobalStyle />
-                    <Component {...pageProps} />
+                    <AuthProvider>
+                        <GlobalStyle />
+                        <Component {...pageProps} />
+                    </AuthProvider>
                 </ThemeProvider>
             </ThemeContext.Provider>
         </>

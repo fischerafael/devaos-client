@@ -3,6 +3,8 @@ import NavBar from '../../src/components/organisms/NavBar'
 import HeaderProfile from '../../src/components/organisms/HeaderProfile'
 import InfoSection from '../../src/components/organisms/InfoSection'
 import ExperienceSection from '../../src/components/organisms/ExperienceSection'
+import LoadingPage from '../../src/components/templates/LoadingPage'
+import { filterExp, filterUser } from '../../src/helpers/pages/github'
 
 import {
     getStaticPathsGithub,
@@ -12,8 +14,8 @@ import {
 
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
-import LoadingPage from '../../src/components/templates/LoadingPage'
-import { filterExp, filterUser } from '../../src/helpers/pages/github'
+import { useContext } from 'react'
+import useGetProfileData from '../../src/hooks/useGetProfileData'
 
 interface Props {
     data: NextProps
@@ -23,10 +25,18 @@ const Home: React.FC<Props> = ({ data }) => {
     const { isFallback } = useRouter()
     if (isFallback) return <LoadingPage />
 
-    const { avatar, name, title, github, linkedin, blog } = filterUser(data)
-    const { proExp, eduExp } = filterExp(data)
-    const skills = data?.skills ? data.skills : []
-    const bio = data?.bio ? data.bio : ''
+    const {
+        avatar,
+        name,
+        title,
+        github,
+        linkedin,
+        blog,
+        bio,
+        proExp,
+        eduExp,
+        skills
+    } = useGetProfileData(data)
 
     return (
         <>
@@ -40,7 +50,7 @@ const Home: React.FC<Props> = ({ data }) => {
                 linkedin={linkedin}
                 web={blog}
             />
-            {bio && <InfoSection bio={data.bio.bio} />}
+            {bio && <InfoSection bio={bio} />}
             {proExp.length && (
                 <ExperienceSection type={'professional'} experiences={proExp} />
             )}
