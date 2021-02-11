@@ -19,6 +19,7 @@ import {
 } from '../../src/components/organisms/FormLoginRegister'
 import Link from 'next/link'
 import CustomLinkForm from '../../src/components/atoms/CustomLinkForm'
+import LoadingPage from '../../src/components/templates/LoadingPage'
 
 const Register = () => {
     const router = useRouter()
@@ -34,6 +35,8 @@ const Register = () => {
     const [avatar, setAvatar] = useState('')
     const [location, setLocation] = useState('')
     const [title, setTitle] = useState('')
+
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         async function getGithuInfo(username: string) {
@@ -71,6 +74,7 @@ const Register = () => {
 
     async function handleUserRegistration(e) {
         e.preventDefault()
+        setLoading(true)
         try {
             const response = await devaosApi.post('/users', {
                 github,
@@ -86,6 +90,7 @@ const Register = () => {
             router.push(`/${github}`)
         } catch (err) {
             console.log(err)
+            setLoading(false)
             alert(
                 'Falha ao cadastrar usuário. Certifique-se se o usuário Github ou o Email informados já não estão sendo utilizados'
             )
@@ -95,123 +100,137 @@ const Register = () => {
     return (
         <>
             <CustomHead title="Cadastrar-se" />
-            <DefaultPageContainer>
-                <FormContainerStyle>
-                    <FormContentStyle>
-                        <Link href="/">
-                            <a>
-                                <CustomFiX />
-                            </a>
-                        </Link>
-                        <h1>Cadastre-se</h1>
-                        <h2>Crie sua conta</h2>
-                        {currentPage === 0 && (
-                            <>
-                                <Input
-                                    type="text"
-                                    title="Usuário GitHub"
-                                    value={github}
-                                    onChange={(e) => setGithub(e.target.value)}
-                                />
-                                <FormPagination
-                                    totalPages={totalPages}
-                                    previous={handlePreviusPage}
-                                    next={handleNextPage}
-                                    currentPage={currentPage}
-                                />
-                            </>
-                        )}
-                        {currentPage === 1 && (
-                            <>
-                                <Input
-                                    type="password"
-                                    title="Senha"
-                                    value={password}
-                                    onChange={(e) =>
-                                        setPassword(e.target.value)
-                                    }
-                                />
-                                <Input
-                                    type="text"
-                                    title="Email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                />
-                                <Input
-                                    type="text"
-                                    title="Nome"
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                />
-                                <FormPagination
-                                    totalPages={totalPages}
-                                    previous={handlePreviusPage}
-                                    next={handleNextPage}
-                                    currentPage={currentPage}
-                                />
-                            </>
-                        )}
-                        {currentPage === 2 && (
-                            <>
-                                <Avatar src={avatar} alt={github} />
-                                <Input
-                                    type="text"
-                                    title="Link Imagem de Perfil"
-                                    value={avatar}
-                                    onChange={(e) => setAvatar(e.target.value)}
-                                />
-                                <Input
-                                    type="text"
-                                    title="Título Profissional"
-                                    value={title}
-                                    onChange={(e) => setTitle(e.target.value)}
-                                />
-                                <Input
-                                    type="text"
-                                    title="Localização"
-                                    value={location}
-                                    onChange={(e) =>
-                                        setLocation(e.target.value)
-                                    }
-                                />
-                                <FormPagination
-                                    totalPages={totalPages}
-                                    previous={handlePreviusPage}
-                                    next={handleNextPage}
-                                    currentPage={currentPage}
-                                />
-                                {github &&
-                                email &&
-                                password &&
-                                name &&
-                                avatar &&
-                                location &&
-                                title ? (
-                                    <FormButton
-                                        onClick={handleUserRegistration}
-                                    >
-                                        CADASTRAR
-                                    </FormButton>
-                                ) : (
-                                    <p
-                                        style={{
-                                            textAlign: 'center',
-                                            marginBottom: '2rem',
-                                            fontWeight: 'bold'
-                                        }}
-                                    >
-                                        Preencha todos os campos
-                                    </p>
-                                )}
-                            </>
-                        )}
+            {loading ? (
+                <LoadingPage />
+            ) : (
+                <DefaultPageContainer>
+                    <FormContainerStyle>
+                        <FormContentStyle>
+                            <Link href="/">
+                                <a>
+                                    <CustomFiX />
+                                </a>
+                            </Link>
+                            <h1>Cadastre-se</h1>
+                            <h2>Crie sua conta</h2>
+                            {currentPage === 0 && (
+                                <>
+                                    <Input
+                                        type="text"
+                                        title="Usuário GitHub"
+                                        value={github}
+                                        onChange={(e) =>
+                                            setGithub(e.target.value)
+                                        }
+                                    />
+                                    <FormPagination
+                                        totalPages={totalPages}
+                                        previous={handlePreviusPage}
+                                        next={handleNextPage}
+                                        currentPage={currentPage}
+                                    />
+                                </>
+                            )}
+                            {currentPage === 1 && (
+                                <>
+                                    <Input
+                                        type="password"
+                                        title="Senha"
+                                        value={password}
+                                        onChange={(e) =>
+                                            setPassword(e.target.value)
+                                        }
+                                    />
+                                    <Input
+                                        type="text"
+                                        title="Email"
+                                        value={email}
+                                        onChange={(e) =>
+                                            setEmail(e.target.value)
+                                        }
+                                    />
+                                    <Input
+                                        type="text"
+                                        title="Nome"
+                                        value={name}
+                                        onChange={(e) =>
+                                            setName(e.target.value)
+                                        }
+                                    />
+                                    <FormPagination
+                                        totalPages={totalPages}
+                                        previous={handlePreviusPage}
+                                        next={handleNextPage}
+                                        currentPage={currentPage}
+                                    />
+                                </>
+                            )}
+                            {currentPage === 2 && (
+                                <>
+                                    <Avatar src={avatar} alt={github} />
+                                    <Input
+                                        type="text"
+                                        title="Link Imagem de Perfil"
+                                        value={avatar}
+                                        onChange={(e) =>
+                                            setAvatar(e.target.value)
+                                        }
+                                    />
+                                    <Input
+                                        type="text"
+                                        title="Título Profissional"
+                                        value={title}
+                                        onChange={(e) =>
+                                            setTitle(e.target.value)
+                                        }
+                                    />
+                                    <Input
+                                        type="text"
+                                        title="Localização"
+                                        value={location}
+                                        onChange={(e) =>
+                                            setLocation(e.target.value)
+                                        }
+                                    />
+                                    <FormPagination
+                                        totalPages={totalPages}
+                                        previous={handlePreviusPage}
+                                        next={handleNextPage}
+                                        currentPage={currentPage}
+                                    />
+                                    {github &&
+                                    email &&
+                                    password &&
+                                    name &&
+                                    avatar &&
+                                    location &&
+                                    title ? (
+                                        <FormButton
+                                            onClick={handleUserRegistration}
+                                        >
+                                            CADASTRAR
+                                        </FormButton>
+                                    ) : (
+                                        <p
+                                            style={{
+                                                textAlign: 'center',
+                                                marginBottom: '2rem',
+                                                fontWeight: 'bold'
+                                            }}
+                                        >
+                                            Preencha todos os campos
+                                        </p>
+                                    )}
+                                </>
+                            )}
 
-                        <CustomLinkForm href="/register">
-                            Ainda não sou cadastrado
-                        </CustomLinkForm>
-                    </FormContentStyle>
-                </FormContainerStyle>
-            </DefaultPageContainer>
+                            <CustomLinkForm href="/register">
+                                Ainda não sou cadastrado
+                            </CustomLinkForm>
+                        </FormContentStyle>
+                    </FormContainerStyle>
+                </DefaultPageContainer>
+            )}
         </>
     )
 }

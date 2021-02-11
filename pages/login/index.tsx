@@ -15,6 +15,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import devaosApi from '../../src/services/devaos-api'
+import LoadingPage from '../../src/components/templates/LoadingPage'
 
 const index = () => {
     const router = useRouter()
@@ -22,18 +23,21 @@ const index = () => {
     const [github, setGithub] = useState('')
     const [password, setPassword] = useState('')
 
+    const [loading, setLoading] = useState(false)
+
     async function handleLogin(e) {
         e.preventDefault
+        setLoading(true)
         try {
             const { data } = await devaosApi.post('/sessions', {
                 github,
                 password
             })
             console.log(data)
-            alert('Login realizado com sucesso')
             router.push(`/${github}`)
         } catch (err) {
             console.log(err)
+            setLoading(false)
             alert('Erro ao realizar login')
         }
     }
@@ -41,37 +45,43 @@ const index = () => {
     return (
         <>
             <CustomHead title="Entrar" />
-            <DefaultPageContainer>
-                <FormContainerStyle>
-                    <FormContentStyle>
-                        <Link href="/">
-                            <a>
-                                <CustomFiX />
-                            </a>
-                        </Link>
-                        <h1>Cadastre-se</h1>
-                        <h2>Crie sua conta</h2>
+            {loading ? (
+                <LoadingPage />
+            ) : (
+                <DefaultPageContainer>
+                    <FormContainerStyle>
+                        <FormContentStyle>
+                            <Link href="/">
+                                <a>
+                                    <CustomFiX />
+                                </a>
+                            </Link>
+                            <h1>Entre</h1>
+                            <h2>Faça login agora mesmo</h2>
 
-                        <Input
-                            type="text"
-                            title="Usuário GitHub"
-                            value={github}
-                            onChange={(e) => setGithub(e.target.value)}
-                        />
-                        <Input
-                            type="text"
-                            title="Senha"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                        <FormButton onClick={handleLogin}>ENTRAR</FormButton>
+                            <Input
+                                type="text"
+                                title="Usuário GitHub"
+                                value={github}
+                                onChange={(e) => setGithub(e.target.value)}
+                            />
+                            <Input
+                                type="password"
+                                title="Senha"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                            <FormButton onClick={handleLogin}>
+                                ENTRAR
+                            </FormButton>
 
-                        <CustomLinkForm href="/register">
-                            Ainda não sou cadastrado
-                        </CustomLinkForm>
-                    </FormContentStyle>
-                </FormContainerStyle>
-            </DefaultPageContainer>
+                            <CustomLinkForm href="/register">
+                                Ainda não sou cadastrado
+                            </CustomLinkForm>
+                        </FormContentStyle>
+                    </FormContainerStyle>
+                </DefaultPageContainer>
+            )}
         </>
     )
 }

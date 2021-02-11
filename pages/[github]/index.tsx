@@ -37,12 +37,10 @@ const Home = ({ data }) => {
             <CustomHead title={userData.personal.name} />
             <NavBar />
             <HeaderProfile
-                avatar={`http://${userData.personal.avatar}`}
+                avatar={userData.personal.avatar}
                 name={userData.personal.name}
                 description={userData.personal.title}
                 github={`http://github.com/${userData.github}`}
-                linkedin="https://www.linkedin.com/in"
-                web={`/${userData.github}`}
             />
             {bio !== '' && <InfoSection bio={userData.bio.bio} />}
             {proExp.length > 0 && (
