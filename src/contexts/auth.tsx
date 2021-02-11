@@ -22,6 +22,14 @@ export const AuthProvider = ({ children }) => {
         setLogged(true)
         setId(data.id)
         setGithub(data.github)
+
+        const localStorageData = {
+            logged: true,
+            _id: data.id,
+            github: data.github
+        }
+
+        localStorage.setItem('devaos', JSON.stringify(localStorageData))
     }
 
     return (
