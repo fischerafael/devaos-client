@@ -41,6 +41,8 @@ const Home = ({ data }) => {
                 name={userData.personal.name}
                 description={userData.personal.title}
                 github={`http://github.com/${userData.github}`}
+                linkedin={userData.links.linkedin}
+                web={userData.links.blog}
             />
             {bio !== '' && <InfoSection bio={userData.bio.bio} />}
             {proExp.length > 0 && (

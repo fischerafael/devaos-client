@@ -33,4 +33,8 @@ interface NextProps {
     bio?: IBio
     skills?: ISKills[]
     experiences?: IExp[]
+    links?: {
+        blog: string
+        linkedin: string
+    }
 }

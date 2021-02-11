@@ -51,7 +51,7 @@ export const CustomLinkedin = styled(FaLinkedin)`
     color: ${({ theme }) => theme.color.dark};
     width: 20px;
     height: 20px;
-    margin: 5px 0;
+    margin: 1rem;
 
     transition: 0.5s;
     &:hover {
@@ -62,7 +62,7 @@ export const CustomGlobe = styled(FaGlobe)`
     color: ${({ theme }) => theme.color.dark};
     width: 20px;
     height: 20px;
-    margin: 5px 0;
+    margin: 1rem;
 
     transition: 0.5s;
     &:hover {
