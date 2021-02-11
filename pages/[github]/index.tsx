@@ -4,7 +4,6 @@ import HeaderProfile from '../../src/components/organisms/HeaderProfile'
 import InfoSection from '../../src/components/organisms/InfoSection'
 import ExperienceSection from '../../src/components/organisms/ExperienceSection'
 import LoadingPage from '../../src/components/templates/LoadingPage'
-import { filterExp, filterUser } from '../../src/helpers/pages/github'
 
 import {
     getStaticPathsGithub,
@@ -15,7 +14,10 @@ import {
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
+
 import useGetProfileData from '../../src/hooks/useGetProfileData'
+
+import AuthContext from '../../src/contexts/auth'
 
 interface Props {
     data: NextProps
@@ -24,6 +26,10 @@ interface Props {
 const Home: React.FC<Props> = ({ data }) => {
     const { isFallback } = useRouter()
     if (isFallback) return <LoadingPage />
+
+    const { logged, user } = useContext(AuthContext)
+
+    console.log(logged, user)
 
     const {
         avatar,

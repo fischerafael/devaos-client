@@ -10,15 +10,19 @@ import {
     FormContentStyle
 } from '../../src/components/organisms/FormLoginRegister'
 
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import devaosApi from '../../src/services/devaos-api'
 import LoadingPage from '../../src/components/templates/LoadingPage'
 
+import AuthContext from '../../src/contexts/auth'
+
 const index = () => {
     const router = useRouter()
+
+    const { handleAuth } = useContext(AuthContext)
 
     const [github, setGithub] = useState('')
     const [password, setPassword] = useState('')
@@ -33,7 +37,9 @@ const index = () => {
                 github,
                 password
             })
-            console.log(data)
+
+            handleAuth({ id: data._id, github: data.github })
+
             router.push(`/${github}`)
         } catch (err) {
             console.log(err)
