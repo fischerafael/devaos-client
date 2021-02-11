@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import Avatar from '../../atoms/Avatar'
 import SocialIcon from '../../atoms/SocialIcon'
 import DefaultPageContainer from '../../templates/DefaultPageContainer'
 
@@ -24,7 +23,7 @@ const HeaderProfile: React.FC<Props> = ({
         <DefaultPageContainer>
             <ProfileHeaderContentStyle>
                 <ContentCotainerStyle>
-                    <Avatar alt={name} avatar={avatar} />
+                    <img src={avatar} alt={name} />
                 </ContentCotainerStyle>
                 <ContentCotainerStyle>
                     <h1>{name}</h1>
@@ -65,6 +64,12 @@ export const ContentCotainerStyle = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    img {
+        width: 15rem;
+        height: 15rem;
+        border-radius: 50%;
+    }
 
     h1 {
         font-weight: 900;

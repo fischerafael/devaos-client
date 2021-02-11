@@ -12,64 +12,65 @@ import {
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import devaosApi from '../../src/services/devaos-api'
 
 const index = () => {
+    const router = useRouter()
+
     const [github, setGithub] = useState('')
     const [password, setPassword] = useState('')
 
     async function handleLogin(e) {
         e.preventDefault
-        alert('oi')
         try {
             const { data } = await devaosApi.post('/sessions', {
                 github,
                 password
             })
             console.log(data)
-            alert('logou')
+            alert('Login realizado com sucesso')
+            router.push(`/${github}`)
         } catch (err) {
             console.log(err)
-            alert('erro')
+            alert('Erro ao realizar login')
         }
     }
 
     return (
         <>
+            <CustomHead title="Entrar" />
             <DefaultPageContainer>
-                <CustomHead title="Entrar" />
-                <DefaultPageContainer>
-                    <FormContainerStyle>
-                        <FormContentStyle>
-                            <Link href="/">
+                <FormContainerStyle>
+                    <FormContentStyle>
+                        <Link href="/">
+                            <a>
                                 <CustomFiX />
-                            </Link>
-                            <h1>Cadastre-se</h1>
-                            <h2>Crie sua conta</h2>
+                            </a>
+                        </Link>
+                        <h1>Cadastre-se</h1>
+                        <h2>Crie sua conta</h2>
 
-                            <Input
-                                type="text"
-                                title="Usuário GitHub"
-                                value={github}
-                                onChange={(e) => setGithub(e.target.value)}
-                            />
-                            <Input
-                                type="text"
-                                title="Senha"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                            <FormButton onClick={handleLogin}>
-                                ENTRAR
-                            </FormButton>
+                        <Input
+                            type="text"
+                            title="Usuário GitHub"
+                            value={github}
+                            onChange={(e) => setGithub(e.target.value)}
+                        />
+                        <Input
+                            type="text"
+                            title="Senha"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <FormButton onClick={handleLogin}>ENTRAR</FormButton>
 
-                            <CustomLinkForm href="/register">
-                                Ainda não sou cadastrado
-                            </CustomLinkForm>
-                        </FormContentStyle>
-                    </FormContainerStyle>
-                </DefaultPageContainer>
+                        <CustomLinkForm href="/register">
+                            Ainda não sou cadastrado
+                        </CustomLinkForm>
+                    </FormContentStyle>
+                </FormContainerStyle>
             </DefaultPageContainer>
         </>
     )
