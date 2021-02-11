@@ -13,6 +13,7 @@ import {
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import LoadingPage from '../../src/components/templates/LoadingPage'
+import { filterExp } from '../../src/helpers/pages/github'
 
 const Home = ({ data }) => {
     const router = useRouter()
@@ -23,12 +24,7 @@ const Home = ({ data }) => {
 
     const userData = data as NextProps
 
-    const proExp = userData?.experiences
-        ? userData.experiences.filter((exp) => exp.type === 'professional')
-        : []
-    const edExp = userData?.experiences
-        ? userData.experiences.filter((exp) => exp.type === 'education')
-        : []
+    const { proExp, eduExp } = filterExp(userData)
     const skills = userData?.skills ? userData.skills : []
     const bio = userData?.bio ? userData.bio : ''
 
@@ -48,8 +44,8 @@ const Home = ({ data }) => {
             {proExp.length > 0 && (
                 <ExperienceSection type={'professional'} experiences={proExp} />
             )}
-            {edExp.length > 0 && (
-                <ExperienceSection type={'education'} experiences={edExp} />
+            {eduExp.length > 0 && (
+                <ExperienceSection type={'education'} experiences={eduExp} />
             )}
             {skills.length > 0 && (
                 <ExperienceSection type={'skill'} skills={skills} />
