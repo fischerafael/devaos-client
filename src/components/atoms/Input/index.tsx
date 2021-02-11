@@ -3,12 +3,19 @@ import styled from 'styled-components'
 
 interface Props {
     type?: string
+    placeholder?: string
     title: string
     value: string
     onChange(e: any): void
 }
 
-const Input: React.FC<Props> = ({ type, title, value, onChange }) => {
+const Input: React.FC<Props> = ({
+    type,
+    placeholder,
+    title,
+    value,
+    onChange
+}) => {
     return (
         <InputContainerStyle>
             <input
@@ -16,6 +23,7 @@ const Input: React.FC<Props> = ({ type, title, value, onChange }) => {
                 required
                 value={value}
                 onChange={onChange}
+                placeholder={placeholder}
             />
             <label>{title}</label>
         </InputContainerStyle>
@@ -36,7 +44,7 @@ export const InputContainerStyle = styled.div`
         transition: 0.5s;
 
         padding: 0 2rem;
-        padding-top: 0rem;
+        padding-top: 0.5rem;
         font-size: 1rem;
 
         border: 1px solid ${({ theme }) => theme.color.grey};
@@ -53,7 +61,7 @@ export const InputContainerStyle = styled.div`
 
         &:focus + label,
         &:valid + label {
-            top: 0.5rem;
+            top: 0.75rem;
             font-size: 0.5rem;
         }
     }

@@ -33,7 +33,7 @@ export const TextAreaContainerStyle = styled.div`
         transition: 0.5s;
 
         padding: 0 2rem;
-        padding-top: 1.5rem;
+        padding-top: 0.5rem;
         font-size: 1rem;
 
         border: 1px solid ${({ theme }) => theme.color.grey};
@@ -53,7 +53,7 @@ export const TextAreaContainerStyle = styled.div`
 
         &:focus + label,
         &:valid + label {
-            top: 0.5rem;
+            top: 0.75rem;
             font-size: 0.5rem;
         }
     }

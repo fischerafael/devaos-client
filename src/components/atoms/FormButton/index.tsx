@@ -1,12 +1,6 @@
 import styled from 'styled-components'
 
-const FormButton = ({ children, onClick }) => {
-    return <FormButtonStyle onClick={onClick}>{children}</FormButtonStyle>
-}
-
-export default FormButton
-
-export const FormButtonStyle = styled.button`
+export const FormButton = styled.button`
     height: 3rem;
     min-width: 15rem;
     width: 100%;

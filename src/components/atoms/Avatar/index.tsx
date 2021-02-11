@@ -2,34 +2,27 @@ import React from 'react'
 import styled from 'styled-components'
 
 interface Props {
-    avatar?: string
+    src?: string
     alt?: string
 }
 
-const Avatar: React.FC<Props> = ({ avatar, alt }) => {
-    return (
-        <AvatarStyle
-            src={
-                avatar
-                    ? avatar
-                    : 'https://www.thermaxglobal.com/wp-content/uploads/2020/05/image-not-found.jpg'
-            }
-            alt={alt}
-        />
-    )
+const Avatar: React.FC<Props> = ({ src, alt }) => {
+    return <AvatarStyle>{src && <img src={src} alt={alt} />}</AvatarStyle>
 }
 
 export default Avatar
 
-export const AvatarStyle = styled.img`
-    border-radius: 50%;
-    width: 50%;
+export const AvatarStyle = styled.div`
+    width: 100%;
+    height: 100%;
 
-    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    @media (max-width: 800px) {
-        width: 15rem;
-        height: 15rem;
+    img {
+        width: 5rem;
+        height: 5rem;
         border-radius: 50%;
     }
 `

@@ -1,21 +1,25 @@
 import CustomHead from '../../src/components/atoms/CustomHead'
-import FormButton from '../../src/components/atoms/FormButton'
 import Input from '../../src/components/atoms/Input'
 import SessionFormPage from '../../src/components/organisms/SessionFormPage'
 import DefaultPageContainer from '../../src/components/templates/DefaultPageContainer'
 import FormPagination from '../../src/components/molecules/FormPagination'
+import Avatar from '../../src/components/atoms/Avatar'
+
+import { FormButton } from '../../src/components/atoms/FormButton'
 
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 
 import githubApi from '../../src/services/github-api'
 import devaosApi from '../../src/services/devaos-api'
-import Avatar from '../../src/components/atoms/Avatar'
 
 const Register = () => {
-    const [currentPage, setCurrentPage] = useState(0)
-    const [totalPages, setTotalPages] = useState(3)
+    const router = useRouter()
 
-    const [github, setGithub] = useState('fischerafael')
+    const [currentPage, setCurrentPage] = useState(2)
+    const [totalPages, setTotalPages] = useState(2)
+
+    const [github, setGithub] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -58,7 +62,8 @@ const Register = () => {
         )
     }
 
-    async function handleUserRegistration() {
+    async function handleUserRegistration(e) {
+        e.preventDefault()
         try {
             const response = await devaosApi.post('/users', {
                 github,
@@ -71,9 +76,12 @@ const Register = () => {
             })
             console.log(response)
             alert('Usuário cadastrado com sucesso')
+            router.push('/login')
         } catch (err) {
             console.log(err)
-            alert('erro')
+            alert(
+                'Falha ao cadastrar usuário. Certifique-se se o usuário Github ou o Email informados já não estão sendo utilizados'
+            )
         }
     }
 
@@ -133,16 +141,16 @@ const Register = () => {
                     )}
                     {currentPage === 2 && (
                         <>
-                            <Avatar avatar={avatar} alt={github} />
+                            <Avatar src={avatar} alt={github} />
                             <Input
                                 type="text"
-                                title="Perfil"
+                                title="Link Imagem de Perfil"
                                 value={avatar}
                                 onChange={(e) => setAvatar(e.target.value)}
                             />
                             <Input
                                 type="text"
-                                title="Título"
+                                title="Título Profissional"
                                 value={title}
                                 onChange={(e) => setTitle(e.target.value)}
                             />
