@@ -22,6 +22,7 @@ export const CustomLinkStyle = styled.a`
     font-size: 0.75rem;
 
     line-height: 0.75rem;
+    margin: 1rem;
     margin-bottom: 1rem;
 
     transition: 0.5s;
