@@ -1,9 +1,5 @@
 import CustomHead from '../../src/components/atoms/CustomHead'
-import Input from '../../src/components/atoms/Input'
-
 import DefaultPageContainer from '../../src/components/templates/DefaultPageContainer'
-import FormPagination from '../../src/components/molecules/FormPagination'
-import Avatar from '../../src/components/atoms/Avatar'
 
 import { FormButton } from '../../src/components/atoms/FormButton'
 
@@ -27,19 +23,21 @@ import AvatarStep from '../../src/components/organisms/FormSection/AvatarStep'
 import NameTitleLocationSetp from '../../src/components/organisms/FormSection/NameTitleLocationStep'
 
 import FormStep from '../../src/components/molecules/FormStep'
+import LinksSection from '../../src/components/organisms/FormSection/LinksSection'
 
 const registrationForm = [
     { page: 1, fields: ['gihub'] },
     { page: 2, fields: ['email', 'password'] },
     { page: 3, fields: ['avatar'] },
-    { page: 4, fields: ['name', 'title', 'location'] }
+    { page: 4, fields: ['name', 'title', 'location'] },
+    { page: 5, field: ['linkedin', 'blog'] }
 ]
 
 const Register = () => {
     const router = useRouter()
 
     const [currentPage, setCurrentPage] = useState(0)
-    const [totalPages, setTotalPages] = useState(4)
+    const [totalPages, setTotalPages] = useState(5)
 
     const [github, setGithub] = useState('')
 
@@ -51,6 +49,9 @@ const Register = () => {
     const [name, setName] = useState('')
     const [title, setTitle] = useState('')
     const [location, setLocation] = useState('')
+
+    const [linkedin, setLinkedin] = useState('')
+    const [blog, setBlog] = useState('')
 
     const [loading, setLoading] = useState(false)
 
@@ -111,7 +112,9 @@ const Register = () => {
                 name,
                 avatar,
                 location,
-                title
+                title,
+                linkedin,
+                blog
             })
             console.log(response)
             router.push(`/${github}`)
@@ -168,6 +171,14 @@ const Register = () => {
                                     setLocation={setLocation}
                                 />
                             )}
+                            {currentPage === 4 && (
+                                <LinksSection
+                                    linkedin={linkedin}
+                                    setLinkedin={setLinkedin}
+                                    blog={blog}
+                                    setBlog={setBlog}
+                                />
+                            )}
                             <FormStep
                                 pages={registrationForm}
                                 currentPage={currentPage}
@@ -181,7 +192,7 @@ const Register = () => {
                                 avatar &&
                                 location &&
                                 title &&
-                                currentPage === 3 && (
+                                currentPage === 4 && (
                                     <FormButton
                                         onClick={handleUserRegistration}
                                     >
