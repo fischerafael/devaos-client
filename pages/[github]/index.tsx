@@ -13,41 +13,41 @@ import {
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import LoadingPage from '../../src/components/templates/LoadingPage'
-import { filterExp } from '../../src/helpers/pages/github'
+import { filterExp, filterUser } from '../../src/helpers/pages/github'
 
-const Home = ({ data }) => {
-    const router = useRouter()
+interface Props {
+    data: NextProps
+}
 
-    if (router.isFallback) {
-        return <LoadingPage />
-    }
+const Home: React.FC<Props> = ({ data }) => {
+    const { isFallback } = useRouter()
+    if (isFallback) return <LoadingPage />
 
-    const userData = data as NextProps
-
-    const { proExp, eduExp } = filterExp(userData)
-    const skills = userData?.skills ? userData.skills : []
-    const bio = userData?.bio ? userData.bio : ''
+    const { avatar, name, title, github, linkedin, blog } = filterUser(data)
+    const { proExp, eduExp } = filterExp(data)
+    const skills = data?.skills ? data.skills : []
+    const bio = data?.bio ? data.bio : ''
 
     return (
         <>
-            <CustomHead title={userData.personal.name} />
+            <CustomHead title={name} />
             <NavBar />
             <HeaderProfile
-                avatar={userData.personal.avatar}
-                name={userData.personal.name}
-                description={userData.personal.title}
-                github={`http://github.com/${userData.github}`}
-                linkedin={userData?.links?.linkedin}
-                web={userData?.links?.blog}
+                avatar={avatar}
+                name={name}
+                description={title}
+                github={github}
+                linkedin={linkedin}
+                web={blog}
             />
-            {bio !== '' && <InfoSection bio={userData.bio.bio} />}
-            {proExp.length > 0 && (
+            {bio && <InfoSection bio={data.bio.bio} />}
+            {proExp.length && (
                 <ExperienceSection type={'professional'} experiences={proExp} />
             )}
-            {eduExp.length > 0 && (
+            {eduExp.length && (
                 <ExperienceSection type={'education'} experiences={eduExp} />
             )}
-            {skills.length > 0 && (
+            {skills.length && (
                 <ExperienceSection type={'skill'} skills={skills} />
             )}
         </>
@@ -58,7 +58,6 @@ export default Home
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const { data } = await getStaticPathsGithub()
-
     const paths = getStaticPathsGithubFormat(data)
 
     return {
@@ -69,7 +68,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
     const github = context.params.github as string
-
     const { data, status } = await getStaticPropsGithub(github)
 
     if (status !== 200) {
