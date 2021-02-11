@@ -38,7 +38,7 @@ const index = () => {
                 password
             })
 
-            handleAuth({ id: data._id, github: data.github })
+            handleAuth({ id: data._id, github: data.github, login: true })
 
             router.push(`/${github}`)
         } catch (err) {

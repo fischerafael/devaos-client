@@ -6,7 +6,7 @@ interface Props {
         _id: string
         github: string
     }
-    handleAuth(data: { id: string; github: string }): void
+    handleAuth(data: { id: string; github: string; login?: boolean }): void
 }
 
 const AuthContext = createContext({} as Props)
@@ -18,18 +18,20 @@ export const AuthProvider = ({ children }) => {
     const [id, setId] = useState('')
     const [github, setGithub] = useState('')
 
-    function handleAuth(data: { id: string; github: string }) {
+    function handleAuth(data: { id: string; github: string; login?: true }) {
         setLogged(true)
         setId(data.id)
         setGithub(data.github)
 
-        const localStorageData = {
-            logged: true,
-            _id: data.id,
-            github: data.github
-        }
+        if (data.login) {
+            const localStorageData = {
+                logged: true,
+                _id: data.id,
+                github: data.github
+            }
 
-        localStorage.setItem('devaos', JSON.stringify(localStorageData))
+            localStorage.setItem('devaos', JSON.stringify(localStorageData))
+        }
     }
 
     return (

@@ -13,11 +13,10 @@ import {
 
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
-import { useContext } from 'react'
 
 import useGetProfileData from '../../src/hooks/useGetProfileData'
 
-import AuthContext from '../../src/contexts/auth'
+import useAuth from '../../src/hooks/useAuth'
 
 interface Props {
     data: NextProps
@@ -27,7 +26,7 @@ const Home: React.FC<Props> = ({ data }) => {
     const { isFallback } = useRouter()
     if (isFallback) return <LoadingPage />
 
-    const { logged, user } = useContext(AuthContext)
+    const { logged, user } = useAuth()
 
     console.log(logged, user)
 
