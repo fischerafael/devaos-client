@@ -35,9 +35,14 @@ export const CustomGithub = styled(FaGithub)`
     color: ${({ theme }) => theme.color.dark};
     width: 20px;
     height: 20px;
-    margin: 5px 0;
+    margin: 1rem;
 
     transition: 0.5s;
+
+    &:first-child {
+        margin-left: 0;
+    }
+
     &:hover {
         color: ${({ theme }) => theme.color.cian};
     }

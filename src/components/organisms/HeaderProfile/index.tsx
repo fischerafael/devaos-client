@@ -105,14 +105,14 @@ export const ContentCotainerStyle = styled.div`
     }
 
     div {
-        width: 8rem;
         align-self: flex-start;
         height: 2rem;
 
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-        grid-gap: 1rem;
-        padding: 10px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        margin-top: 1rem;
 
         @media (max-width: 800px) {
             align-self: center;
