@@ -56,13 +56,13 @@ const Home: React.FC<Props> = ({ data }) => {
                 web={blog}
             />
             {bio && <InfoSection bio={bio} />}
-            {proExp.length && (
+            {proExp.length > 0 && (
                 <ExperienceSection type={'professional'} experiences={proExp} />
             )}
-            {eduExp.length && (
+            {eduExp.length > 0 && (
                 <ExperienceSection type={'education'} experiences={eduExp} />
             )}
-            {skills.length && (
+            {skills.lenght > 0 && (
                 <ExperienceSection type={'skill'} skills={skills} />
             )}
         </>

@@ -5,11 +5,15 @@ import Link from 'next/link'
 
 import { useContext } from 'react'
 import ThemeContext from '../../../contexts/theme'
+import useAuth from '../../../hooks/useAuth'
 
 import { FaSun, FaMoon } from 'react-icons/fa'
 
 const NavBar = () => {
     const { handleChangeTheme, dark } = useContext(ThemeContext)
+    const { logged, user, isOwner } = useAuth()
+
+    console.log('is owner', isOwner)
 
     return (
         <NavBarContainerStyle>
@@ -28,7 +32,7 @@ const NavBar = () => {
                     ) : (
                         <FaSun onClick={handleChangeTheme} />
                     )}
-                    <NavButton url="/login">ENTRAR</NavButton>
+                    {logged ? null : <NavButton url="/login">ENTRAR</NavButton>}
                 </NavBarActionsStyle>
             </NavBarContentStyle>
         </NavBarContainerStyle>
