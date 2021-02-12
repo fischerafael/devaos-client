@@ -1,10 +1,9 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { FiX } from 'react-icons/fi'
 import styled from 'styled-components'
 
 import useAddBio from '../../../hooks/useAddBio'
 
-import useAuth from '../../../hooks/useAuth'
 import { FormButton } from '../../atoms/FormButton'
 import { SendingModalStyle } from '../Modal/styles'
 import AddFeature from '../Modal/styles/Add'
@@ -16,8 +15,6 @@ interface Props {
 }
 
 const EditContainer: React.FC<Props> = ({ type }) => {
-    const { user } = useAuth()
-
     const {
         bio,
         setBio,
@@ -25,9 +22,7 @@ const EditContainer: React.FC<Props> = ({ type }) => {
         setOpenBioModal,
         openBioModal,
         loading
-    } = useAddBio({
-        userId: user._id
-    })
+    } = useAddBio()
 
     if (type === 'bio') {
         return (

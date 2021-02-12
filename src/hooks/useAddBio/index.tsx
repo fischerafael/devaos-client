@@ -1,34 +1,16 @@
-import { useState, useContext } from 'react'
+import { useContext } from 'react'
 import ProfileInterfaceManagerContext from '../../contexts/profile-interface'
-import ReFetchContext from '../../contexts/reFetch'
-import devaosApi from '../../services/devaos-api'
+import BioContext from '../../contexts/profile/bio'
 
-const useAddBio = ({ userId }) => {
-    const { setReFetch } = useContext(ReFetchContext)
-    const { setOpenBioModal, openBioModal, setLoading, loading } = useContext(
-        ProfileInterfaceManagerContext
-    )
-
-    /*const [bio, setBio] = useState('')
-
-    async function handleAddBio(e: any) {
-        e.preventDefault()
-        setLoading(true)
-        try {
-            const response = await devaosApi.post(`/users/${userId}/bio`, {
-                bio
-            })
-            const { data } = response
-            console.log('created bio', data)
-
-            setLoading(true)
-            setReFetch((prevState: boolean) => !prevState)
-            setOpenBioModal(false)
-        } catch (err) {
-            alert('Erro ao adicionar Bio, tente novamente.')
-            setLoading(true)
-        }
-    }*/
+const useAddBio = () => {
+    const { setLoading, loading } = useContext(ProfileInterfaceManagerContext)
+    const {
+        bio,
+        setBio,
+        handleAddBio,
+        openBioModal,
+        setOpenBioModal
+    } = useContext(BioContext)
 
     return {
         bio,

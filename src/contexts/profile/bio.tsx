@@ -6,6 +6,10 @@ import ReFetchContext from '../reFetch'
 
 interface Props {
     handleAddBio(e: any): Promise<void>
+    bio: string
+    setBio(e: string): void
+    openBioModal: boolean
+    setOpenBioModal(e: boolean): void
 }
 
 const BioContext = createContext({} as Props)
@@ -15,7 +19,7 @@ export default BioContext
 export const BioProvider = ({ children }) => {
     const { setReFetch } = useContext(ReFetchContext)
     const { user } = useContext(AuthContext)
-    const { setOpenBioModal, openBioModal, setLoading, loading } = useContext(
+    const { setOpenBioModal, openBioModal, setLoading } = useContext(
         ProfileInterfaceManagerContext
     )
 
@@ -36,12 +40,14 @@ export const BioProvider = ({ children }) => {
             setOpenBioModal(false)
         } catch (err) {
             alert('Erro ao adicionar Bio, tente novamente.')
-            setLoading(true)
+            setLoading(false)
         }
     }
 
     return (
-        <BioContext.Provider value={{ handleAddBio }}>
+        <BioContext.Provider
+            value={{ handleAddBio, bio, setBio, openBioModal, setOpenBioModal }}
+        >
             {children}
         </BioContext.Provider>
     )
