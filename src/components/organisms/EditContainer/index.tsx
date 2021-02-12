@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { FiX } from 'react-icons/fi'
 import styled from 'styled-components'
-import ProfileInterfaceManagerContext from '../../../contexts/profile-interface'
+
 import useAddBio from '../../../hooks/useAddBio'
 
 import useAuth from '../../../hooks/useAuth'

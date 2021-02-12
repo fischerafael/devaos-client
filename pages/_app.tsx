@@ -10,6 +10,7 @@ import { EditProvider } from '../src/contexts/edit'
 import { ReFetchProvider } from '../src/contexts/reFetch'
 import { ProfileManagerProvider } from '../src/contexts/profile-manager'
 import { ProfileInterfaceProvider } from '../src/contexts/profile-interface'
+import { BioProvider } from '../src/contexts/profile/bio'
 
 export default function App({ Component, pageProps }) {
     const [dark, setDarkTheme] = useState<boolean>(false)
@@ -27,8 +28,10 @@ export default function App({ Component, pageProps }) {
                             <ReFetchProvider>
                                 <ProfileInterfaceProvider>
                                     <ProfileManagerProvider>
-                                        <GlobalStyle />
-                                        <Component {...pageProps} />
+                                        <BioProvider>
+                                            <GlobalStyle />
+                                            <Component {...pageProps} />
+                                        </BioProvider>
                                     </ProfileManagerProvider>
                                 </ProfileInterfaceProvider>
                             </ReFetchProvider>
