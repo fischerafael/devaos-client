@@ -5,25 +5,28 @@ import ProfileInterfaceManagerContext from '../../../contexts/profile-interface'
 import useAddBio from '../../../hooks/useAddBio'
 
 import useAuth from '../../../hooks/useAuth'
+import { FormButton } from '../../atoms/FormButton'
+import { SendingModalStyle } from '../Modal/styles'
+import AddFeature from '../Modal/styles/Add'
 
 import BioContainer from './BioContainer'
 
 interface Props {
-    section: string
     type: 'bio' | 'exp' | 'edu' | 'skill'
 }
 
-const EditContainer: React.FC<Props> = ({ section, type }) => {
+const EditContainer: React.FC<Props> = ({ type }) => {
     const { user } = useAuth()
 
-    const { loading, setLoading, setOpenBioModal, openBioModal } = useContext(
-        ProfileInterfaceManagerContext
-    )
-
-    const { bio, setBio, handleAddBio } = useAddBio({
-        userId: user._id,
-        setLoading,
-        setOpenModal: setOpenBioModal
+    const {
+        bio,
+        setBio,
+        handleAddBio,
+        setOpenBioModal,
+        openBioModal,
+        loading
+    } = useAddBio({
+        userId: user._id
     })
 
     if (type === 'bio') {
@@ -31,24 +34,23 @@ const EditContainer: React.FC<Props> = ({ section, type }) => {
             <BioContainer
                 setOpenModal={setOpenBioModal}
                 modalOpen={openBioModal}
-                handleAdd={handleAddBio}
-                state={bio}
-                setState={setBio}
-                loading={loading}
-            />
-        )
-    }
-
-    if (type === 'edu') {
-        return (
-            <BioContainer
-                setOpenModal={setOpenBioModal}
-                modalOpen={openBioModal}
-                handleAdd={handleAddBio}
-                state={bio}
-                setState={setBio}
-                loading={loading}
-            />
+                title="Biografia"
+            >
+                {loading ? (
+                    <SendingModalStyle>Enviando...</SendingModalStyle>
+                ) : (
+                    <>
+                        <AddFeature
+                            setState={setBio}
+                            state={bio}
+                            sectionName="Biografia"
+                        />
+                        <FormButton onClick={handleAddBio}>
+                            Adicionar
+                        </FormButton>
+                    </>
+                )}
+            </BioContainer>
         )
     }
 

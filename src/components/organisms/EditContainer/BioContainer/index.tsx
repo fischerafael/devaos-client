@@ -3,22 +3,14 @@ import { FiX } from 'react-icons/fi'
 import styled from 'styled-components'
 import DefaultButton from '../../../atoms/DefaultButton'
 import { ModalContainerStyle, ModalContentStyle } from '../../Modal/styles'
-import AddFeature from '../../Modal/styles/Add'
 
-const BioContainer = ({
-    setOpenModal,
-    modalOpen,
-    handleAdd,
-    setState,
-    state,
-    loading
-}) => {
+const BioContainer = ({ children, setOpenModal, modalOpen, title }) => {
     return (
         <>
             <EditContainerStyle>
                 <div>
                     <DefaultButton action={(e) => setOpenModal(true)}>
-                        Adicionar Bio
+                        Adicionar {title}
                     </DefaultButton>
                 </div>
             </EditContainerStyle>
@@ -28,13 +20,7 @@ const BioContainer = ({
                     <ModalContentStyle>
                         <CustomFiX onClick={(e) => setOpenModal(false)} />
 
-                        <AddFeature
-                            handleAdd={handleAdd}
-                            setState={setState}
-                            state={state}
-                            loading={loading}
-                            sectionName="Biografia"
-                        />
+                        {children}
                     </ModalContentStyle>
                 </ModalContainerStyle>
             )}

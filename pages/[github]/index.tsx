@@ -67,9 +67,7 @@ const Home: React.FC<Props> = ({ data }) => {
                 web={blog}
             />
 
-            {isOwner && activeEditMode && !bio && (
-                <EditContainer type="bio" section="Sobre" />
-            )}
+            {isOwner && activeEditMode && !bio && <EditContainer type="bio" />}
 
             {bio && <InfoSection bio={bio} />}
 

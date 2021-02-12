@@ -1,9 +1,13 @@
 import { useState, useContext } from 'react'
+import ProfileInterfaceManagerContext from '../../contexts/profile-interface'
 import ReFetchContext from '../../contexts/reFetch'
 import devaosApi from '../../services/devaos-api'
 
-const useAddBio = ({ userId, setLoading, setOpenModal }) => {
+const useAddBio = ({ userId }) => {
     const { setReFetch } = useContext(ReFetchContext)
+    const { setOpenBioModal, openBioModal, loading, setLoading } = useContext(
+        ProfileInterfaceManagerContext
+    )
 
     const [bio, setBio] = useState('')
 
@@ -19,7 +23,7 @@ const useAddBio = ({ userId, setLoading, setOpenModal }) => {
 
             setLoading(true)
             setReFetch((prevState: boolean) => !prevState)
-            setOpenModal(false)
+            setOpenBioModal(false)
         } catch (err) {
             alert('Erro ao adicionar Bio, tente novamente.')
             setLoading(true)
@@ -29,7 +33,11 @@ const useAddBio = ({ userId, setLoading, setOpenModal }) => {
     return {
         bio,
         setBio,
-        handleAddBio
+        handleAddBio,
+        setOpenBioModal,
+        openBioModal,
+        loading,
+        setLoading
     }
 }
 
