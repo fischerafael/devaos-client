@@ -6,6 +6,7 @@ import ReFetchContext from '../reFetch'
 
 interface Props {
     handleAddBio(e: any): Promise<void>
+    handleDeleteBio(e: any): Promise<void>
     bio: string
     setBio(e: string): void
     openBioModal: boolean
@@ -19,11 +20,10 @@ export default BioContext
 export const BioProvider = ({ children }) => {
     const { setReFetch } = useContext(ReFetchContext)
     const { user } = useContext(AuthContext)
-    const { setOpenBioModal, openBioModal, setLoading } = useContext(
-        ProfileInterfaceManagerContext
-    )
+    const { setLoading } = useContext(ProfileInterfaceManagerContext)
 
     const [bio, setBio] = useState('')
+    const [openBioModal, setOpenBioModal] = useState(false)
 
     async function handleAddBio(e: any) {
         e.preventDefault()
@@ -44,9 +44,27 @@ export const BioProvider = ({ children }) => {
         }
     }
 
+    async function handleDeleteBio(e: any) {
+        e.preventDefault()
+        setLoading(true)
+        try {
+            alert('deletou')
+            setLoading(false)
+        } catch (err) {
+            setLoading(false)
+        }
+    }
+
     return (
         <BioContext.Provider
-            value={{ handleAddBio, bio, setBio, openBioModal, setOpenBioModal }}
+            value={{
+                handleAddBio,
+                handleDeleteBio,
+                bio,
+                setBio,
+                openBioModal,
+                setOpenBioModal
+            }}
         >
             {children}
         </BioContext.Provider>
