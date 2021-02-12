@@ -40,7 +40,7 @@ export const ExpProvider = ({ children }) => {
     const [institution, setInstitution] = useState('')
     const [location, setLocation] = useState('')
     const [startedAt, setStartedAt] = useState(2021)
-    const [finishedAt, setFinishedAt] = useState(2021)
+    const [finishedAt, setFinishedAt] = useState(new Date().getFullYear())
     const [description, setDescription] = useState('')
 
     const [openProModal, setOpenProModal] = useState(false)
@@ -69,9 +69,9 @@ export const ExpProvider = ({ children }) => {
             setTitle('')
             setInstitution('')
             setLocation('')
-            setStartedAt(undefined)
-            setFinishedAt(undefined)
-            setDescription('')
+            setStartedAt(2021)
+            setFinishedAt(new Date().getFullYear())
+            setDescription(undefined)
         } catch (err) {
             console.log('erro ao criar exp')
             setLoading(false)

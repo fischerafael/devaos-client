@@ -82,15 +82,17 @@ const ExperienceContainer = ({ kind }) => {
                         setState={setDescription}
                         state={description}
                         sectionName="Descrição"
-                        input={true}
-                        inputType="text"
                     />
 
-                    {kind === 'pro' && (
-                        <FormButton onClick={handleCreateProExp}>
-                            Adicionarr
-                        </FormButton>
-                    )}
+                    {kind === 'pro' &&
+                        title &&
+                        institution &&
+                        location &&
+                        startedAt && (
+                            <FormButton onClick={handleCreateProExp}>
+                                Adicionarr
+                            </FormButton>
+                        )}
                 </>
             )}
         </GenericContainer>
