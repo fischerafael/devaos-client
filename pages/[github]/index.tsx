@@ -19,8 +19,9 @@ import useGetProfileData from '../../src/hooks/useGetProfileData'
 import useAuth from '../../src/hooks/useAuth'
 import DefaultButton from '../../src/components/atoms/DefaultButton'
 import EditContainer from '../../src/components/organisms/EditContainer'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import EditContext from '../../src/contexts/edit'
+import ReFetchContext from '../../src/contexts/reFetch'
 
 interface Props {
     data: NextProps
@@ -30,10 +31,20 @@ const Home: React.FC<Props> = ({ data }) => {
     const { isFallback } = useRouter()
     if (isFallback) return <LoadingPage />
 
+    const [initialData, setInitialData] = useState(data)
+
+    const { updatedData } = useContext(ReFetchContext)
+    useEffect(() => {
+        const updatedDataTypes = updatedData as NextProps
+        if (updatedDataTypes.github) {
+            setInitialData(updatedData as NextProps)
+        }
+    }, [updatedData])
+
     const { logged, user, isOwner } = useAuth()
     const { activeEditMode } = useContext(EditContext)
 
-    console.log(logged, user, isOwner)
+    //console.log(logged, user, isOwner)
 
     const {
         avatar,
@@ -46,7 +57,7 @@ const Home: React.FC<Props> = ({ data }) => {
         proExp,
         eduExp,
         skills
-    } = useGetProfileData(data)
+    } = useGetProfileData(initialData)
 
     return (
         <>
@@ -90,7 +101,7 @@ const Home: React.FC<Props> = ({ data }) => {
                 <EditContainer type="skill" section="Habilidades" />
             )}
 
-            {skills.lenght > 0 && (
+            {skills.length > 0 && (
                 <ExperienceSection type={'skill'} skills={skills} />
             )}
         </>

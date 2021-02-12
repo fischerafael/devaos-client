@@ -1,9 +1,11 @@
+import { useRouter } from 'next/router'
 import React, { useState, useContext } from 'react'
 import ReFetchContext from '../../contexts/reFetch'
 import devaosApi from '../../services/devaos-api'
 
 const useAddBio = ({ userId, setLoading, setOpenModal }) => {
     const { setReFetch } = useContext(ReFetchContext)
+    const router = useRouter()
 
     const [bio, setBio] = useState('')
 
@@ -19,6 +21,7 @@ const useAddBio = ({ userId, setLoading, setOpenModal }) => {
 
             setLoading(true)
             setReFetch((prevState: boolean) => !prevState)
+            router.push('/fischerafael')
             setOpenModal(false)
         } catch (err) {
             alert('Erro ao adicionar Bio, tente novamente.')

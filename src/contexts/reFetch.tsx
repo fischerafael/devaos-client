@@ -5,6 +5,7 @@ import AuthContext from './auth'
 interface Props {
     reFetch: boolean
     setReFetch(e: any): void
+    updatedData: object
 }
 
 const ReFetchContext = createContext({} as Props)
@@ -15,15 +16,15 @@ export const ReFetchProvider = ({ children }) => {
     const { user } = useContext(AuthContext)
 
     const [reFetch, setReFetch] = useState(false)
-    const [data, setData] = useState({})
+
+    const [updatedData, setUpdateData] = useState({ notUpdated: true })
 
     useEffect(() => {
         async function getUserData() {
             try {
                 const response = await devaosApi.get(`/profiles/${user.github}`)
                 const { data } = response
-                setData(data)
-                console.log(data)
+                setUpdateData(data)
             } catch (err) {
                 console.log(
                     'Trying to refetch without providing user github',
@@ -35,7 +36,13 @@ export const ReFetchProvider = ({ children }) => {
     }, [reFetch])
 
     return (
-        <ReFetchContext.Provider value={{ reFetch, setReFetch }}>
+        <ReFetchContext.Provider
+            value={{
+                reFetch,
+                setReFetch,
+                updatedData
+            }}
+        >
             {children}
         </ReFetchContext.Provider>
     )
