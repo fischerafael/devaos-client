@@ -33,7 +33,7 @@ export const TextAreaContainerStyle = styled.div`
         transition: 0.5s;
 
         padding: 0 2rem;
-        padding-top: 0.5rem;
+        padding-top: 1.5rem;
         font-size: 1rem;
 
         border: 1px solid ${({ theme }) => theme.color.grey};

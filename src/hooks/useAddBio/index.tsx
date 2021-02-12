@@ -5,7 +5,7 @@ import devaosApi from '../../services/devaos-api'
 
 const useAddBio = ({ userId, setLoading, setOpenModal }) => {
     const { setReFetch } = useContext(ReFetchContext)
-    const router = useRouter()
+    //const router = useRouter()
 
     const [bio, setBio] = useState('')
 
@@ -21,7 +21,7 @@ const useAddBio = ({ userId, setLoading, setOpenModal }) => {
 
             setLoading(true)
             setReFetch((prevState: boolean) => !prevState)
-            router.reload()
+            //router.reload()
             setOpenModal(false)
         } catch (err) {
             alert('Erro ao adicionar Bio, tente novamente.')

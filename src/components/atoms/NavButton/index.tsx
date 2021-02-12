@@ -9,19 +9,17 @@ interface Props {
 
 const NavButton: React.FC<Props> = ({ children, url, active, action }) => {
     return (
-        <Link href={url ? url : '/'}>
-            <a style={{ textDecoration: 'none' }}>
-                {active ? (
-                    <ActiveNavBarButtonStyle onClick={action}>
-                        {children}
-                    </ActiveNavBarButtonStyle>
-                ) : (
-                    <InactiveNavBarButtonStyle onClick={action}>
-                        {children}
-                    </InactiveNavBarButtonStyle>
-                )}
-            </a>
-        </Link>
+        <>
+            {active ? (
+                <ActiveNavBarButtonStyle onClick={action}>
+                    {children}
+                </ActiveNavBarButtonStyle>
+            ) : (
+                <InactiveNavBarButtonStyle onClick={action}>
+                    {children}
+                </InactiveNavBarButtonStyle>
+            )}
+        </>
     )
 }
 
