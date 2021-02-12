@@ -17,6 +17,10 @@ import { useRouter } from 'next/router'
 import useGetProfileData from '../../src/hooks/useGetProfileData'
 
 import useAuth from '../../src/hooks/useAuth'
+import DefaultButton from '../../src/components/atoms/DefaultButton'
+import EditContainer from '../../src/components/organisms/EditContainer'
+import { useContext } from 'react'
+import EditContext from '../../src/contexts/edit'
 
 interface Props {
     data: NextProps
@@ -27,6 +31,7 @@ const Home: React.FC<Props> = ({ data }) => {
     if (isFallback) return <LoadingPage />
 
     const { logged, user, isOwner } = useAuth()
+    const { activeEditMode } = useContext(EditContext)
 
     console.log(logged, user, isOwner)
 
@@ -55,13 +60,36 @@ const Home: React.FC<Props> = ({ data }) => {
                 linkedin={linkedin}
                 web={blog}
             />
+
+            {isOwner && activeEditMode && !bio && (
+                <EditContainer type="bio" section="Sobre" />
+            )}
+
             {bio && <InfoSection bio={bio} />}
+
+            {isOwner && activeEditMode && (
+                <EditContainer
+                    type="exp"
+                    section="Experiências Profissionais"
+                />
+            )}
+
             {proExp.length > 0 && (
                 <ExperienceSection type={'professional'} experiences={proExp} />
             )}
+
+            {isOwner && activeEditMode && (
+                <EditContainer type="edu" section="Educação" />
+            )}
+
             {eduExp.length > 0 && (
                 <ExperienceSection type={'education'} experiences={eduExp} />
             )}
+
+            {isOwner && activeEditMode && (
+                <EditContainer type="skill" section="Habilidades" />
+            )}
+
             {skills.lenght > 0 && (
                 <ExperienceSection type={'skill'} skills={skills} />
             )}

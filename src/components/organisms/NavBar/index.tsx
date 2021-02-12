@@ -10,13 +10,16 @@ import useAuth from '../../../hooks/useAuth'
 import { FaSun, FaMoon } from 'react-icons/fa'
 import AuthContext from '../../../contexts/auth'
 import NavButton from '../../atoms/NavButton'
+import EditContext from '../../../contexts/edit'
 
 const NavBar = () => {
     const { handleChangeTheme, dark } = useContext(ThemeContext)
     const { logged, user, isOwner } = useAuth()
     const { handleLogout } = useContext(AuthContext)
 
-    const [activeEditMode, setEditMode] = useState(false)
+    const { activeEditMode, handleEditMode } = useContext(EditContext)
+
+    console.log(activeEditMode)
 
     return (
         <NavBarContainerStyle>
@@ -38,7 +41,7 @@ const NavBar = () => {
                     {logged && (
                         <NavButton
                             url={`${user.github}`}
-                            action={() => setEditMode(!activeEditMode)}
+                            action={handleEditMode}
                             active={activeEditMode}
                         >
                             Editar Perfil

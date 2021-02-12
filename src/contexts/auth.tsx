@@ -1,5 +1,4 @@
 import { createContext, useState } from 'react'
-import { Router, useRouter } from 'next/router'
 
 interface Props {
     logged: boolean
