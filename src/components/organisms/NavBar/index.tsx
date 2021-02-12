@@ -38,7 +38,7 @@ const NavBar = () => {
                     ) : (
                         <FaSun onClick={handleChangeTheme} />
                     )}
-                    {logged && (
+                    {logged && isOwner && (
                         <NavButton
                             url={`${user.github}`}
                             action={handleEditMode}

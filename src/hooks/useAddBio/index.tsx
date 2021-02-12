@@ -21,7 +21,7 @@ const useAddBio = ({ userId, setLoading, setOpenModal }) => {
 
             setLoading(true)
             setReFetch((prevState: boolean) => !prevState)
-            router.push('/fischerafael')
+            router.reload()
             setOpenModal(false)
         } catch (err) {
             alert('Erro ao adicionar Bio, tente novamente.')
