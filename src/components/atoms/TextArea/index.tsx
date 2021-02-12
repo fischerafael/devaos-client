@@ -4,7 +4,7 @@ import styled from 'styled-components'
 interface Props {
     type?: string
     title: string
-    value: string
+    value: string | number
     onChange(e: any): void
 }
 

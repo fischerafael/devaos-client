@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import DefaultButton from '../../../atoms/DefaultButton'
 import { ModalContainerStyle, ModalContentStyle } from '../../Modal/styles'
 
-const BioContainer = ({ children, setOpenModal, modalOpen, title }) => {
+const GenericContainer = ({ children, setOpenModal, modalOpen, title }) => {
     return (
         <>
             <EditContainerStyle>
@@ -28,7 +28,7 @@ const BioContainer = ({ children, setOpenModal, modalOpen, title }) => {
     )
 }
 
-export default BioContainer
+export default GenericContainer
 
 export const EditContainerStyle = styled.div`
     width: 100%;

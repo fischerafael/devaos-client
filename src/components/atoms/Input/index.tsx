@@ -5,7 +5,7 @@ interface Props {
     type?: string
     placeholder?: string
     title: string
-    value: string
+    value: string | number
     onChange(e: any): void
 }
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FiX } from 'react-icons/fi'
 import styled from 'styled-components'
 
@@ -8,13 +8,15 @@ import { FormButton } from '../../atoms/FormButton'
 import { SendingModalStyle } from '../Modal/styles'
 import AddFeature from '../Modal/styles/Add'
 
-import BioContainer from './BioContainer'
+import GenericContainer from './GenericContainer'
+
+import ExperienceContainer from './GenericContainer/Experience'
 
 interface Props {
-    type: 'bio' | 'exp' | 'edu' | 'skill'
+    kind: 'bio' | 'exp' | 'edu' | 'skill'
 }
 
-const EditContainer: React.FC<Props> = ({ type }) => {
+const EditContainer: React.FC<Props> = ({ kind }) => {
     const {
         bio,
         setBio,
@@ -24,9 +26,13 @@ const EditContainer: React.FC<Props> = ({ type }) => {
         loading
     } = useAddBio()
 
-    if (type === 'bio') {
+    if (kind === 'exp') {
+        return <ExperienceContainer kind="pro" />
+    }
+
+    if (kind === 'bio') {
         return (
-            <BioContainer
+            <GenericContainer
                 setOpenModal={setOpenBioModal}
                 modalOpen={openBioModal}
                 title="Biografia"
@@ -35,6 +41,7 @@ const EditContainer: React.FC<Props> = ({ type }) => {
                     <SendingModalStyle>Enviando...</SendingModalStyle>
                 ) : (
                     <>
+                        <h1>Adicionar Biografia</h1>
                         <AddFeature
                             setState={setBio}
                             state={bio}
@@ -45,7 +52,7 @@ const EditContainer: React.FC<Props> = ({ type }) => {
                         </FormButton>
                     </>
                 )}
-            </BioContainer>
+            </GenericContainer>
         )
     }
 

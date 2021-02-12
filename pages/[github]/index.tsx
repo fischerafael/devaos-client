@@ -65,23 +65,23 @@ const Home: React.FC<Props> = ({ data }) => {
                 web={blog}
             />
 
-            {isOwner && activeEditMode && !bio && <EditContainer type="bio" />}
+            {isOwner && activeEditMode && !bio && <EditContainer kind="bio" />}
 
             {bio && <InfoSection bio={bio} />}
 
-            {isOwner && activeEditMode && <EditContainer type="exp" />}
+            {isOwner && activeEditMode && <EditContainer kind="exp" />}
 
             {proExp.length > 0 && (
                 <ExperienceSection type={'professional'} experiences={proExp} />
             )}
 
-            {isOwner && activeEditMode && <EditContainer type="edu" />}
+            {isOwner && activeEditMode && <EditContainer kind="edu" />}
 
             {eduExp.length > 0 && (
                 <ExperienceSection type={'education'} experiences={eduExp} />
             )}
 
-            {isOwner && activeEditMode && <EditContainer type="skill" />}
+            {isOwner && activeEditMode && <EditContainer kind="skill" />}
 
             {skills.length > 0 && (
                 <ExperienceSection type={'skill'} skills={skills} />
