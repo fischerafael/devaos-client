@@ -8,6 +8,8 @@ import { useState } from 'react'
 import { AuthProvider } from '../src/contexts/auth'
 import { EditProvider } from '../src/contexts/edit'
 import { ReFetchProvider } from '../src/contexts/reFetch'
+import { ProfileManagerProvider } from '../src/contexts/profile-manager'
+import { ProfileInterfaceProvider } from '../src/contexts/profile-interface'
 
 export default function App({ Component, pageProps }) {
     const [dark, setDarkTheme] = useState<boolean>(false)
@@ -23,8 +25,12 @@ export default function App({ Component, pageProps }) {
                     <AuthProvider>
                         <EditProvider>
                             <ReFetchProvider>
-                                <GlobalStyle />
-                                <Component {...pageProps} />
+                                <ProfileInterfaceProvider>
+                                    <ProfileManagerProvider>
+                                        <GlobalStyle />
+                                        <Component {...pageProps} />
+                                    </ProfileManagerProvider>
+                                </ProfileInterfaceProvider>
                             </ReFetchProvider>
                         </EditProvider>
                     </AuthProvider>
