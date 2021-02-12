@@ -20,7 +20,7 @@ export const DefaultButtonStyle = styled.button`
     font-size: 1rem;
     font-weight: 900;
 
-    background: ${({ theme }) => theme.color.dark};
+    background: ${({ theme }) => theme.color.cian};
     color: ${({ theme }) => theme.color.white};
 
     transition: 0.5s;
@@ -28,7 +28,7 @@ export const DefaultButtonStyle = styled.button`
     margin: 1rem 0;
 
     &:hover {
-        background: ${({ theme }) => theme.color.cian};
+        background: ${({ theme }) => theme.color.dark};
         color: ${({ theme }) => theme.color.white};
     }
 

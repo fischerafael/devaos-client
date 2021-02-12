@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 
 export const FormButton = styled.button`
-    height: 3rem;
+    height: 4rem;
     min-width: 15rem;
     width: 100%;
 
-    border-radius: 1.5rem;
+    border-radius: 2rem;
 
     font-size: 1rem;
     font-weight: 900;

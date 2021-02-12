@@ -7,6 +7,7 @@ import ThemeContext from '../src/contexts/theme'
 import { useState } from 'react'
 import { AuthProvider } from '../src/contexts/auth'
 import { EditProvider } from '../src/contexts/edit'
+import { ReFetchProvider } from '../src/contexts/reFetch'
 
 export default function App({ Component, pageProps }) {
     const [dark, setDarkTheme] = useState<boolean>(false)
@@ -21,8 +22,10 @@ export default function App({ Component, pageProps }) {
                 <ThemeProvider theme={dark === true ? darkTheme : defaultTheme}>
                     <AuthProvider>
                         <EditProvider>
-                            <GlobalStyle />
-                            <Component {...pageProps} />
+                            <ReFetchProvider>
+                                <GlobalStyle />
+                                <Component {...pageProps} />
+                            </ReFetchProvider>
                         </EditProvider>
                     </AuthProvider>
                 </ThemeProvider>

@@ -1,10 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FiX } from 'react-icons/fi'
 import styled from 'styled-components'
+import useAddBio from '../../../hooks/useAddBio'
+
+import useAuth from '../../../hooks/useAuth'
+import devaosApi from '../../../services/devaos-api'
 import DefaultButton from '../../atoms/DefaultButton'
+import { FormButton } from '../../atoms/FormButton'
 import Input from '../../atoms/Input'
 import TextArea from '../../atoms/TextArea'
-import { ModalContainerStyle, ModalContentStyle } from '../Modal/styles'
+import {
+    ModalContainerStyle,
+    ModalContentStyle,
+    SendingModalStyle
+} from '../Modal/styles'
+import AddFeature from '../Modal/styles/Add'
 
 interface Props {
     section: string
@@ -12,11 +22,15 @@ interface Props {
 }
 
 const EditContainer: React.FC<Props> = ({ section, type }) => {
+    const { user } = useAuth()
     const [openModal, setOpenModal] = useState(false)
+    const [loading, setLoading] = useState(false)
 
-    const [bio, setBio] = useState('')
-
-    console.log('bio', bio)
+    const { bio, setBio, handleAddBio } = useAddBio({
+        userId: user._id,
+        setLoading,
+        setOpenModal
+    })
 
     return (
         <>
@@ -33,17 +47,40 @@ const EditContainer: React.FC<Props> = ({ section, type }) => {
                     <ModalContentStyle>
                         <CustomFiX onClick={(e) => setOpenModal(false)} />
 
-                        {type === 'bio' && (
-                            <>
-                                <h1>{section}</h1>
-                                <TextArea
-                                    title="Breve biografia"
-                                    type="text"
-                                    value={bio}
-                                    onChange={(e) => setBio(e.target.value)}
+                        {
+                            type === 'bio' && (
+                                <AddFeature
+                                    handleAdd={handleAddBio}
+                                    setState={setBio}
+                                    state={bio}
+                                    loading={loading}
+                                    sectionName="Biografia"
                                 />
+                            ) /*(
+                            <>
+                                {loading ? (
+                                    <SendingModalStyle>
+                                        Enviando...
+                                    </SendingModalStyle>
+                                ) : (
+                                    <>
+                                        <h1>{section}</h1>
+                                        <TextArea
+                                            title="Breve biografia"
+                                            type="text"
+                                            value={bio}
+                                            onChange={(e) =>
+                                                setBio(e.target.value)
+                                            }
+                                        />
+                                        <FormButton onClick={handleAddBio}>
+                                            Adicionar
+                                        </FormButton>{' '}
+                                    </>
+                                )}
                             </>
-                        )}
+                                        )*/
+                        }
 
                         {type === 'exp' && (
                             <>
@@ -51,8 +88,8 @@ const EditContainer: React.FC<Props> = ({ section, type }) => {
                                 <Input
                                     title="Cargo"
                                     type="text"
-                                    value={bio}
-                                    onChange={(e) => setBio(e.target.value)}
+                                    value={'bio'}
+                                    onChange={(e) => {}}
                                 />
                             </>
                         )}
@@ -86,15 +123,12 @@ export const EditContainerStyle = styled.div`
     width: 100%;
 
     min-height: 30vh;
-    background: ${({ theme }) => theme.color.lightGrey};
-
-    margin: 5em 0;
+    background: ${({ theme }) => theme.color.white};
+    padding: 5em 0;
 
     display: flex;
     align-items: center;
     justify-content: center;
-
-    box-shadow: inset 0 0 2em ${({ theme }) => theme.color.grey};
 
     div {
         max-width: 80rem;

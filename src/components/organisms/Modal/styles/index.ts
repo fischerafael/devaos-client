@@ -44,3 +44,6 @@ export const ModalContentStyle = styled.div`
         width: 100%;
     }
 `
+export const SendingModalStyle = styled.h1`
+    margin: 10rem 0;
+`
