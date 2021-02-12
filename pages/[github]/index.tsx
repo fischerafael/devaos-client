@@ -69,28 +69,19 @@ const Home: React.FC<Props> = ({ data }) => {
 
             {bio && <InfoSection bio={bio} />}
 
-            {isOwner && activeEditMode && (
-                <EditContainer
-                    type="exp"
-                    section="Experiências Profissionais"
-                />
-            )}
+            {isOwner && activeEditMode && <EditContainer type="exp" />}
 
             {proExp.length > 0 && (
                 <ExperienceSection type={'professional'} experiences={proExp} />
             )}
 
-            {isOwner && activeEditMode && (
-                <EditContainer type="edu" section="Educação" />
-            )}
+            {isOwner && activeEditMode && <EditContainer type="edu" />}
 
             {eduExp.length > 0 && (
                 <ExperienceSection type={'education'} experiences={eduExp} />
             )}
 
-            {isOwner && activeEditMode && (
-                <EditContainer type="skill" section="Habilidades" />
-            )}
+            {isOwner && activeEditMode && <EditContainer type="skill" />}
 
             {skills.length > 0 && (
                 <ExperienceSection type={'skill'} skills={skills} />
