@@ -17,11 +17,9 @@ import { useRouter } from 'next/router'
 import useGetProfileData from '../../src/hooks/useGetProfileData'
 
 import useAuth from '../../src/hooks/useAuth'
-import DefaultButton from '../../src/components/atoms/DefaultButton'
 import EditContainer from '../../src/components/organisms/EditContainer'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import EditContext from '../../src/contexts/edit'
-import ReFetchContext from '../../src/contexts/reFetch'
 import useUpdatedData from '../../src/hooks/useUpdatedData'
 
 interface Props {
@@ -39,7 +37,7 @@ const Home: React.FC<Props> = ({ data }) => {
     const { logged, user, isOwner } = useAuth()
     const { activeEditMode } = useContext(EditContext)
 
-    //console.log(logged, user, isOwner)
+    console.log(logged, user, isOwner)
 
     const {
         avatar,

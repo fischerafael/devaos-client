@@ -1,4 +1,8 @@
+import { useContext } from 'react'
 import styled from 'styled-components'
+import AuthContext from '../../../contexts/auth'
+import BioContext from '../../../contexts/profile/bio'
+import { CustomTrash } from '../../atoms/CustomTrash/styles'
 import DefaultPageContainer from '../../templates/DefaultPageContainer'
 
 interface Props {
@@ -6,6 +10,9 @@ interface Props {
 }
 
 const InfoSection: React.FC<Props> = ({ bio }) => {
+    const { user } = useContext(AuthContext)
+    const { handleDeleteBio } = useContext(BioContext)
+
     return (
         <DefaultPageContainer>
             <TwoColumnPageContentStyle>
@@ -13,6 +20,7 @@ const InfoSection: React.FC<Props> = ({ bio }) => {
                     <h2>Sobre</h2>
                 </div>
                 <div>
+                    {user.isOwner && <CustomTrash onClick={handleDeleteBio} />}
                     <p>{bio}</p>
                 </div>
             </TwoColumnPageContentStyle>
@@ -38,6 +46,7 @@ export const TwoColumnPageContentStyle = styled.section`
     }
 
     div {
+        position: relative;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;

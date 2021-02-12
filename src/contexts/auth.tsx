@@ -1,10 +1,12 @@
-import { createContext, useState } from 'react'
+import { useRouter } from 'next/router'
+import { createContext, useEffect, useState } from 'react'
 
 interface Props {
     logged: boolean
     user: {
         _id: string
         github: string
+        isOwner: boolean
     }
     handleAuth(data: { id: string; github: string; login?: boolean }): void
     handleLogout(): void
@@ -17,12 +19,12 @@ export default AuthContext
 export const AuthProvider = ({ children }) => {
     const [logged, setLogged] = useState(false)
     const [id, setId] = useState('')
-    const [github, setGithub] = useState('')
+    const [githubState, setGithubState] = useState('')
 
     function handleAuth(data: { id: string; github: string; login?: true }) {
         setLogged(true)
         setId(data.id)
-        setGithub(data.github)
+        setGithubState(data.github)
 
         if (data.login) {
             const localStorageData = {
@@ -38,15 +40,25 @@ export const AuthProvider = ({ children }) => {
     function handleLogout() {
         setLogged(false)
         setId('')
-        setGithub('')
+        setGithubState('')
         localStorage.removeItem('devaos')
     }
+
+    const router = useRouter()
+    const { github } = router.query
+
+    const [isOwner, setIsOwner] = useState(false)
+
+    useEffect(() => {
+        if (githubState === github) setIsOwner(true)
+        if (githubState === '') setIsOwner(false)
+    }, [githubState, github])
 
     return (
         <AuthContext.Provider
             value={{
                 logged,
-                user: { _id: id, github },
+                user: { _id: id, github: githubState, isOwner },
                 handleAuth,
                 handleLogout
             }}

@@ -36,6 +36,7 @@ export const BioProvider = ({ children }) => {
             console.log('created bio', data)
 
             setLoading(true)
+            setBio('')
             setReFetch((prevState: boolean) => !prevState)
             setOpenBioModal(false)
         } catch (err) {
@@ -48,9 +49,15 @@ export const BioProvider = ({ children }) => {
         e.preventDefault()
         setLoading(true)
         try {
-            alert('deletou')
+            const response = await devaosApi.delete(`/users/${user._id}/bio`)
+            const { data } = response
+            console.log('deleted', data)
+
+            setReFetch((prevState: boolean) => !prevState)
             setLoading(false)
+            alert('Deletado com sucesso')
         } catch (err) {
+            console.log(err)
             setLoading(false)
         }
     }
