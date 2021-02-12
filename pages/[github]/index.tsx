@@ -22,6 +22,7 @@ import EditContainer from '../../src/components/organisms/EditContainer'
 import { useContext, useEffect, useState } from 'react'
 import EditContext from '../../src/contexts/edit'
 import ReFetchContext from '../../src/contexts/reFetch'
+import useUpdatedData from '../../src/hooks/useUpdatedData'
 
 interface Props {
     data: NextProps
@@ -33,13 +34,7 @@ const Home: React.FC<Props> = ({ data }) => {
 
     const [initialData, setInitialData] = useState(data)
 
-    const { updatedData } = useContext(ReFetchContext)
-    useEffect(() => {
-        const updatedDataTypes = updatedData as NextProps
-        if (updatedDataTypes.github) {
-            setInitialData(updatedData as NextProps)
-        }
-    }, [updatedData])
+    useUpdatedData(setInitialData)
 
     const { logged, user, isOwner } = useAuth()
     const { activeEditMode } = useContext(EditContext)
