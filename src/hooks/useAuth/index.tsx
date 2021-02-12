@@ -22,9 +22,10 @@ const useAuth = () => {
 
     useEffect(() => {
         if (user.github === github) setIsOwner(true)
+        if (user.github === '') setIsOwner(false)
     }, [user.github, github])
 
-    return { logged, user, isOwner, handleLogout }
+    return { logged, user, isOwner }
 }
 
 export default useAuth

@@ -1,17 +1,22 @@
-import NavButton from '../../atoms/NavButton'
+import AuthNavButton from '../../atoms/AuthNavButton'
 
 import styled from 'styled-components'
 import Link from 'next/link'
 
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import ThemeContext from '../../../contexts/theme'
 import useAuth from '../../../hooks/useAuth'
 
 import { FaSun, FaMoon } from 'react-icons/fa'
+import AuthContext from '../../../contexts/auth'
+import NavButton from '../../atoms/NavButton'
 
 const NavBar = () => {
     const { handleChangeTheme, dark } = useContext(ThemeContext)
-    const { logged, user, isOwner, handleLogout } = useAuth()
+    const { logged, user, isOwner } = useAuth()
+    const { handleLogout } = useContext(AuthContext)
+
+    const [activeEditMode, setEditMode] = useState(false)
 
     return (
         <NavBarContainerStyle>
@@ -30,10 +35,21 @@ const NavBar = () => {
                     ) : (
                         <FaSun onClick={handleChangeTheme} />
                     )}
+                    {logged && (
+                        <NavButton
+                            url={`${user.github}`}
+                            action={() => setEditMode(!activeEditMode)}
+                            active={activeEditMode}
+                        >
+                            Editar Perfil
+                        </NavButton>
+                    )}
                     {logged ? (
-                        <NavButton action={handleLogout}>SAIR</NavButton>
+                        <AuthNavButton action={handleLogout}>
+                            SAIR
+                        </AuthNavButton>
                     ) : (
-                        <NavButton url="/login">ENTRAR</NavButton>
+                        <AuthNavButton url="/login">ENTRAR</AuthNavButton>
                     )}
                 </NavBarActionsStyle>
             </NavBarContentStyle>
