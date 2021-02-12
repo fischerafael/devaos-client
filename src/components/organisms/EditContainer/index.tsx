@@ -49,7 +49,7 @@ const EditContainer: React.FC<Props> = ({ section, type }) => {
                             <>
                                 <h1>{section}</h1>
                                 <Input
-                                    title="Breve biografia"
+                                    title="Cargo"
                                     type="text"
                                     value={bio}
                                     onChange={(e) => setBio(e.target.value)}
