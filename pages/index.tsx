@@ -1,10 +1,11 @@
 import { GetStaticProps } from 'next'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import CustomHead from '../src/components/atoms/CustomHead'
 import { DefaultButtonStyle } from '../src/components/atoms/DefaultButton'
+import Input from '../src/components/atoms/Input'
 import MainButton from '../src/components/atoms/MainButton'
 import ProfileCard from '../src/components/molecules/ProfileCard'
 
@@ -13,8 +14,22 @@ import DefaultPageContainer from '../src/components/templates/DefaultPageContain
 import devaosApi from '../src/services/devaos-api'
 
 const home = ({ data }) => {
-    const [initialData, setInitiaData] = useState(data)
-    console.log(initialData)
+    const [initialData, setInitalData] = useState(data)
+    const [devSearch, setDevSearch] = useState('')
+    const [filteredData, setFilteredData] = useState(initialData || [])
+
+    useEffect(() => {
+        setFilteredData(
+            initialData.filter(
+                (item) =>
+                    item.personal.name.toLowerCase().includes(devSearch) ||
+                    item.personal.name.includes(devSearch) ||
+                    item.github.toLowerCase().includes(devSearch) ||
+                    item.github.includes(devSearch)
+            )
+        )
+    }, [devSearch])
+
     return (
         <>
             <CustomHead title="Dev Aos" />
@@ -34,9 +49,17 @@ const home = ({ data }) => {
                 </HeroContainerStyle>
             </DefaultPageContainer>
             <DefaultPageContainer>
+                <DevTitleContainerStyle>
+                    <h2>Encontre Devs</h2>
+                    <Input
+                        title="Pesquisar Dev"
+                        value={devSearch}
+                        onChange={(e) => setDevSearch(e.target.value)}
+                    />
+                </DevTitleContainerStyle>
                 <UsersSectionStyle>
-                    {data &&
-                        data.map((user) => (
+                    {filteredData &&
+                        filteredData.map((user) => (
                             <ProfileCard
                                 key={user._id}
                                 avatar={user.personal?.avatar}
@@ -87,6 +110,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
         const response = await devaosApi.get('/users')
         const { data } = response
 
+        data.sort(() => Math.random() - 0.5)
+
         return {
             props: {
                 data
@@ -95,7 +120,17 @@ export const getStaticProps: GetStaticProps = async (context) => {
         }
     } catch (err) {}
 }
+export const DevTitleContainerStyle = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
+    min-height: 20vh;
+
+    h2 {
+        font-size: 2rem;
+    }
+`
 export const UsersSectionStyle = styled.main`
     max-width: 80rem;
     width: 90%;
