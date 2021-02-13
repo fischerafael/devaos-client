@@ -35,7 +35,7 @@ export const BioProvider = ({ children }) => {
             const { data } = response
             console.log('created bio', data)
 
-            setLoading(true)
+            setLoading(false)
             setBio('')
             setReFetch((prevState: boolean) => !prevState)
             setOpenBioModal(false)
