@@ -95,7 +95,13 @@ const home = ({ data }) => {
                             selecionado em primeiro lugar dentre mais de 1500
                             propostas).
                         </p>
-                        <DefaultButtonStyle>Ver Perfil</DefaultButtonStyle>
+                        <Link href="/fischerafael">
+                            <a>
+                                <DefaultButtonStyle>
+                                    Ver Perfil
+                                </DefaultButtonStyle>
+                            </a>
+                        </Link>
                     </div>
                 </AboutSectionStyle>
             </DefaultPageContainer>
