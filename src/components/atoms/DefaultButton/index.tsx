@@ -13,7 +13,7 @@ export default DefaultButton
 
 export const DefaultButtonStyle = styled.button`
     height: 4rem;
-    padding: 0 2rem;
+    padding: 2rem;
 
     border-radius: 2rem;
 
