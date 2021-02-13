@@ -22,7 +22,12 @@ interface Props {
     openProModal: boolean
     setOpenProModal(e: boolean): void
 
+    openEduModal: boolean
+    setOpenEduModal(e: boolean): void
+
     handleCreateProExp(e: any): void
+    handleCreateEduExp(e: any): void
+    handleDeleteExp(e: any): void
 
     loading: boolean
 }
@@ -44,6 +49,25 @@ export const ExpProvider = ({ children }) => {
     const [description, setDescription] = useState('')
 
     const [openProModal, setOpenProModal] = useState(false)
+    const [openEduModal, setOpenEduModal] = useState(false)
+
+    async function handleDeleteExp(id: string) {
+        setLoading(true)
+
+        try {
+            const response = await devaosApi.delete(
+                `users/${user._id}/experiences/${id}`
+            )
+            const { data } = response
+            console.log('deletado com sucesso', data)
+            setReFetch((prevState: boolean) => !prevState)
+            setLoading(false)
+            setOpenProModal(false)
+        } catch (err) {
+            console.log('erro ao deletar')
+            setLoading(false)
+        }
+    }
 
     async function handleCreateProExp(e) {
         setLoading(true)
@@ -78,6 +102,39 @@ export const ExpProvider = ({ children }) => {
         }
     }
 
+    async function handleCreateEduExp(e) {
+        setLoading(true)
+        e.preventDefault()
+
+        try {
+            const response = await devaosApi.post(
+                `users/${user._id}/experiences/education`,
+                {
+                    title,
+                    institution,
+                    location,
+                    startedAt,
+                    finishedAt,
+                    description
+                }
+            )
+            const { data } = response
+            console.log('exp edu criada', data)
+            setReFetch((prevState: boolean) => !prevState)
+            setLoading(false)
+            setOpenEduModal(false)
+            setTitle('')
+            setInstitution('')
+            setLocation('')
+            setStartedAt(2021)
+            setFinishedAt(new Date().getFullYear())
+            setDescription(undefined)
+        } catch (err) {
+            console.log('erro ao criar exp')
+            setLoading(false)
+        }
+    }
+
     return (
         <ExpContext.Provider
             value={{
@@ -95,7 +152,11 @@ export const ExpProvider = ({ children }) => {
                 setDescription,
                 openProModal,
                 setOpenProModal,
+                openEduModal,
+                setOpenEduModal,
                 handleCreateProExp,
+                handleCreateEduExp,
+                handleDeleteExp,
                 loading
             }}
         >

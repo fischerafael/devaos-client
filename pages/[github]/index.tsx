@@ -52,6 +52,8 @@ const Home: React.FC<Props> = ({ data }) => {
         skills
     } = useGetProfileData(initialData)
 
+    console.log(eduExp, proExp)
+
     return (
         <>
             <CustomHead title={name} />

@@ -41,6 +41,7 @@ const ExperienceSection: React.FC<Props> = ({ experiences, type, skills }) => {
                         experiences.map((exp) => (
                             <ExperienceCard
                                 key={exp._id}
+                                id={exp._id}
                                 title={exp.title}
                                 startedAt={exp.startedAt}
                                 finishedAt={exp.finishedAt}

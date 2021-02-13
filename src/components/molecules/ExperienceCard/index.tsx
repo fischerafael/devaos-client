@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
+import AuthContext from '../../../contexts/auth'
+import ExpContext from '../../../contexts/profile/exp'
+import { CustomCardTrash } from '../../atoms/CustomTrash/styles'
 
 interface Props {
+    id: string
     title: string
     institution: string
     location: string
@@ -16,10 +20,18 @@ const ExperienceCard: React.FC<Props> = ({
     location,
     description,
     startedAt,
-    finishedAt
+    finishedAt,
+    id
 }) => {
+    const { user } = useContext(AuthContext)
+    const { handleDeleteExp } = useContext(ExpContext)
+    console.log('id', id)
+
     return (
         <ExperienceCardContainerStyle>
+            {user.isOwner && (
+                <CustomCardTrash onClick={() => handleDeleteExp(id)} />
+            )}
             <ExperienceCardHeaderStyle>
                 <h3>{title}</h3>
                 {!finishedAt ? (
@@ -47,6 +59,7 @@ const ExperienceCard: React.FC<Props> = ({
 export default ExperienceCard
 
 export const ExperienceCardContainerStyle = styled.div`
+    position: relative;
     background: ${({ theme }) => theme.color.lightGrey};
     border-radius: 1rem;
     border: solid 0.5px ${({ theme }) => theme.color.grey};

@@ -11,6 +11,8 @@ const ExperienceContainer = ({ kind }) => {
     const {
         setOpenProModal,
         openProModal,
+        setOpenEduModal,
+        openEduModal,
 
         title,
         setTitle,
@@ -25,6 +27,7 @@ const ExperienceContainer = ({ kind }) => {
         description,
         setDescription,
         handleCreateProExp,
+        handleCreateEduExp,
         loading
     } = useContext(ExpContext)
 
@@ -32,17 +35,18 @@ const ExperienceContainer = ({ kind }) => {
 
     return (
         <GenericContainer
-            setOpenModal={setOpenProModal}
-            modalOpen={openProModal}
-            title={kind === 'pro' && 'Experiência Profissional'}
+            setOpenModal={kind === 'pro' ? setOpenProModal : setOpenEduModal}
+            modalOpen={kind === 'pro' ? openProModal : openEduModal}
+            title={kind === 'pro' ? 'Experiência Profissional' : 'Educação'}
         >
             {loading ? (
                 <SendingModalStyle>Enviando...</SendingModalStyle>
             ) : (
                 <>
-                    <h1>
-                        Adicionar {kind === 'pro' && 'Experiência Profissional'}
-                    </h1>
+                    {kind === 'pro' && (
+                        <h1>Adicionar Experiência Profissional</h1>
+                    )}
+                    {kind === 'edu' && <h1>Adicionar Educação</h1>}
                     <AddFeature
                         setState={setTitle}
                         state={title}
@@ -90,7 +94,16 @@ const ExperienceContainer = ({ kind }) => {
                         location &&
                         startedAt && (
                             <FormButton onClick={handleCreateProExp}>
-                                Adicionarr
+                                Adicionar Experiência Profissional
+                            </FormButton>
+                        )}
+                    {kind === 'edu' &&
+                        title &&
+                        institution &&
+                        location &&
+                        startedAt && (
+                            <FormButton onClick={handleCreateEduExp}>
+                                Adicionar Educação
                             </FormButton>
                         )}
                 </>

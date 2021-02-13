@@ -19,3 +19,21 @@ export const CustomTrash = styled(FiTrash)`
         color: white;
     }
 `
+export const CustomCardTrash = styled(FiTrash)`
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+
+    background: ${({ theme }) => theme.color.cian};
+    border-radius: 1rem;
+    width: 2rem;
+    height: 2rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: 0.5s;
+
+    &:hover {
+        background: red;
+        color: white;
+    }
+`

@@ -30,6 +30,10 @@ const EditContainer: React.FC<Props> = ({ kind }) => {
         return <ExperienceContainer kind="pro" />
     }
 
+    if (kind === 'edu') {
+        return <ExperienceContainer kind="edu" />
+    }
+
     if (kind === 'bio') {
         return (
             <GenericContainer
