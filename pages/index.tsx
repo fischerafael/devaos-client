@@ -85,15 +85,15 @@ const home = ({ data }) => {
                         <h2>Rafael Fischer</h2>
                         <p>
                             Criador e idealizador do Dev Aos. Arquiteto e
-                            urbanista que virou dev. Entusiasta de NextJS,
-                            ReactJS, NodeJS, Typescript & Javascript. Curte UI /
-                            UX também.
+                            Urbanista que virou desenvolvedor aos 28 anos.
+                            Programa em NextJS, ReactJS, NodeJS, Typescript &
+                            Javascript. É também entusiasta de UI / UX design.
                         </p>
                         <p>
                             Atualmente, é aluno do Bootcamp Frontend Jamstack da
-                            Alura (ganhou bolsa após ter o projeto AluraQuiz
-                            selecionado em primeiro lugar dentre mais de 1500
-                            propostas).
+                            Alura (ganhador de bolsa após ter o projeto
+                            AluraQuiz selecionado em primeiro lugar dentre mais
+                            de 1500 propostas).
                         </p>
                         <Link href="/fischerafael">
                             <a>
